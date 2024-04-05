@@ -64,4 +64,40 @@ print("device  :", l_tensor_fixed.device)
 print("############### TASK 4 ###############")
 
 l_tensor_complex_view = l_tensor_float[::2,1,:]
+print(l_tensor_complex_view)
+print("size: ", l_tensor_complex_view.size())
+print("stride: ", l_tensor_complex_view.stride())
 
+# [::2,1,:] slices the tensor along the three axis: z, y and x.
+# -> ::2 slices along the z-axis: from start to end with a step 
+#    size of 2, meaning that every second element is selected
+# -> 1 slices along the y-axis: only the element at index 1 
+#    is selected (effectively the second row)
+# -> : slices along the x-axis: every element is selected
+# In summary this means that we select T0 and T2, and for each of those
+# we select the second row (since y = 1) and keep all x entries.
+
+# We are left with 2 rows of 3 elements each, which explains a size of (2, 3)
+# Since we kept the rows intact, the stride in x direction stays 1.
+# Going from 3 to 15, we jump over 12 elements in the original tensor.
+# Another explanation is that instead of jumping only 3 elements 
+# (like in the original tensor), we now skip an additional 3 rows,
+# resulting in 12 elements total.
+
+##########################################################
+# TASK 5
+##########################################################
+print("############### TASK 4 ###############")
+
+l_tensor_complex_view = l_tensor_complex_view.contiguous()
+print(l_tensor_complex_view)
+print("size: ", l_tensor_complex_view.size())
+print("stride: ", l_tensor_complex_view.stride())
+
+# .contiguous() returns a contiguous in memory tensor 
+# containing the same data as l_tensor_complex_view.
+# Since the data is now contiguous in memory, the 
+# stride is what we would naively expect when looking
+# at the view our our tensor: 1 in x-direction and
+# 3 in y-direction, since we skip 3 elements in
+# the memory to jump between rows
