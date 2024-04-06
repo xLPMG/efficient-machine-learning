@@ -1,11 +1,12 @@
 import torch
+import ctypes
 
 ##########################################################
 # TASK 1
 ##########################################################
 print("############### TASK 1 ###############")
 
-# CODE FROM task-2-1-creation-2.py:
+# START CODE FROM task-2-1-creation-2.py:
 zDim = 4
 yDim = 2
 xDim = 3
@@ -21,6 +22,7 @@ for z in range(zDim):
         t_y.append(t_x)
     tensorList.append(t_y)
 tensor = torch.tensor(tensorList)
+# END CODE FROM task-2-1-creation-2.py
 
 print("tensor  :", tensor)
 print("size    :", tensor.size())
@@ -87,7 +89,7 @@ print("stride: ", l_tensor_complex_view.stride())
 ##########################################################
 # TASK 5
 ##########################################################
-print("############### TASK 4 ###############")
+print("############### TASK 5 ###############")
 
 l_tensor_complex_view = l_tensor_complex_view.contiguous()
 print(l_tensor_complex_view)
@@ -101,3 +103,62 @@ print("stride: ", l_tensor_complex_view.stride())
 # at the view our our tensor: 1 in x-direction and
 # 3 in y-direction, since we skip 3 elements in
 # the memory to jump between rows
+
+##########################################################
+# TASK 6
+##########################################################
+print("############### TASK 6 ###############")
+
+# For this task I will use a simpler tensor than before:
+
+ten6List = [[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]]
+ten6 = torch.tensor(ten6List, dtype=torch.float32)
+print(ten6)
+
+# The strides are (6, 3, 1)
+print(ten6.stride())
+zStride = 6
+yStride = 3
+xStride = 1
+
+# A pointer to the start our tensor can be retrieved using
+ten6Ptr = ten6.data_ptr()
+
+################################################################
+# In the following section, I will access different elements
+# of the tensor using pointer arithmatic
+
+# size of element in bytes
+eSize = 4
+
+# first element
+out = (ctypes.c_float).from_address( ten6Ptr )
+print("First value       :", out)
+
+# jump one element in x-direction
+out = (ctypes.c_float).from_address( ten6Ptr + 1 * eSize * xStride)
+print("Jump in x-dir     :", out)
+
+# jump one element in y-direction
+out = (ctypes.c_float).from_address( ten6Ptr + 1 * eSize * yStride )
+print("Jump in y-dir     :", out)
+
+# jump one element in x and y-direction
+out = (ctypes.c_float).from_address( ten6Ptr + 1 * eSize * xStride + 1 * eSize * yStride )
+print("Jump in x-y-dir   :", out)
+
+# jump in z-direction
+out = (ctypes.c_float).from_address( ten6Ptr + 1 * eSize * zStride)
+print("Jump in z-dir     :", out)
+
+# jump one element in x-y-z-direction
+out = (ctypes.c_float).from_address( ten6Ptr + 1 * eSize * xStride + 1 * eSize * yStride + 1 * eSize * zStride)
+print("Jump in x-y-z-dir :", out)
+
+# this works because in memory, the tensor is represented as
+# 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ...
+# The strides tell us how many elements we need to skip in
+# memory to perform a jump in tensor view.
+# For each of those elements, we need to increase the address
+# by eSize, which is 4 in our example since a float32 value 
+# takes up 4 Bytes of memory.
