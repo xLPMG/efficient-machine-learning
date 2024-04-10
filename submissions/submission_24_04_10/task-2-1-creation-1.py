@@ -4,7 +4,7 @@ print("###################################")
 print("torch.zeros")
 print("###################################")
 
-# The following code will produce matrices of given size that are filled with ones
+# The following code will produce matrices of given size that are filled with zeros
 tenZ1 = torch.zeros(2, 2)
 print("size: 2 x 2")
 print(tenZ1)
