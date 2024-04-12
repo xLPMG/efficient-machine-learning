@@ -21,10 +21,14 @@ int main() {
 
   l_tensor = at::from_blob(l_data);
 
-  std::cout << "Tensor :" << l_tensor << std::endl;
-  std::cout << "Dtype  :" << l_tensor.dtype() << std::endl;
-  std::cout << "Size   :" << l_tensor.size() << std::endl;
-  std::cout << "Stride :" << l_tensor.stride() << std::endl;
+  std::cout << "Tensor   :" << l_tensor << std::endl;
+  std::cout << "Data ptr :" << l_tensor.data_ptr() << std::endl;
+  std::cout << "Dtype    :" << l_tensor.dtype() << std::endl;
+  std::cout << "Size     :" << l_tensor.sizes() << std::endl;
+  std::cout << "Stride   :" << l_tensor.strides() << std::endl;
+  std::cout << "Offset   :" << l_tensor.storage_offset() << std::endl;
+  std::cout << "Device   :" << l_tensor.device() << std::endl;
+  std::cout << "Layout   :" << l_tensor.layout() << std::endl;
 
   std::cout << "finished running ATen examples" << std::endl;
 
