@@ -40,9 +40,17 @@ labels = torch.unsqueeze( labels, -1 )
 data_set = torch.utils.data.TensorDataset(points, labels)
 data_loader = torch.utils.data.DataLoader (data_set, batch_size = 64)
 
-#for p, l in data_loader:
-#    print(p.size())
-#    print(l.size())
+# The batch loader should give us 64 samples in each iteration,
+# and the rest (<=64) in the last iteration.
+print("Printing point and label sizes for each iteration:")
+batch_num = 0
+for p, l in data_loader:
+    print("Points, batch #", batch_num, ": ", p.size())
+    print("Labels, batch #", batch_num, ": ", l.size())
+    batch_num+=1
+    
+# It should print "Points, batch #x:  torch.Size([64, 3])" for points, because we have 64 samples with 3 dimensions each per batch
+# It should print "Labels, batch #x: torch.Size([64, 1])" for labels, because we have 64 samples in only one dimension per batch
     
 #############################################################
 # TASK 3-3
