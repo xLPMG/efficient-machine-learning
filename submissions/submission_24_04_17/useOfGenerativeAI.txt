@@ -1,2 +1,0 @@
-In this submission I used the Github Copilot VSCode extension for parts of the code.
--> GitHub Copilot v1.180.0
