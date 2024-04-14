@@ -15,6 +15,6 @@ $(info $$CXXFLAGS is [${CXXFLAGS}])
 $(info $$LDFLAGS is [${LDFLAGS}])
 
 aten: src/aten.cpp
-		$(CXX) ${OPTIONS} ${CXXFLAGS} src/aten.cpp -o ${BUILD_DIR}/aten ${RPATHS} ${LDFLAGS}
+		$(CXX) ${OPTIONS} ${CXXFLAGS} src/aten.cpp -o ${BUILD_DIR}/aten ${RPATHS} ${LDFLAGS} -D_GLIBCXX_USE_CXX11_ABI=0
 
 $(shell mkdir -p ${BUILD_DIR})
