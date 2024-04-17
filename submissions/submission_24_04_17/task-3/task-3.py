@@ -67,9 +67,16 @@ my_eml_model = model.Model()
 loss_func = torch.nn.BCELoss()
 l_optimizer = torch.optim.SGD(my_eml_model.parameters(), lr=0.05)
 
-epochs = 50
+epochs = 50 # = x of task 3.4.2
 
 for epoch in range(epochs):
     total_loss = trainer.train(loss_func, data_loader, my_eml_model, l_optimizer)
     print(f"Epoch {epoch+1}/{epochs}, Total Loss: {total_loss}")
 
+#############################################################
+# TASK 3-4
+#############################################################
+print("################# TASK 3-4 #################")
+
+import eml.vis.points as visualizer
+visualizer.plot(points, my_eml_model)
