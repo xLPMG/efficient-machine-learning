@@ -7,6 +7,9 @@ from torchvision.transforms import ToTensor
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 
+from pathlib import Path
+Path("out").mkdir(exist_ok=True)
+
 #############################################################
 # TASK 4-1
 #############################################################
