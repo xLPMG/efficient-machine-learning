@@ -66,3 +66,7 @@ for epoch in range(epochs):
     
     print(f"Epoch {epoch+1}/{epochs}, Total Loss: {total_loss}, Test loss: {test_loss}, Correct samples: {num_correct}")
     
+#############################################################
+# TASK 4-3
+#############################################################
+print("################# TASK 4-3 #################")

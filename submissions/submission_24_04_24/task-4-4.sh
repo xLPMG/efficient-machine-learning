@@ -18,9 +18,6 @@ echo $SLURM_SUBMIT_DIR
 echo "nodelist:"
 echo $SLURM_JOB_NODELIST
 
-# activate conda environment
-module load tools/anaconda3/2021.05
-source "$(conda info -a | grep CONDA_ROOT | awk -F ' ' '{print $2}')"/etc/profile.d/conda.sh
-conda activate pytorch_x86
+source /home/li83keq/venv_pytorch/bin/activate
 
 python task-4.py
