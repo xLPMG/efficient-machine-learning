@@ -3,7 +3,7 @@
 # Example Draco job script.
 ##
 #SBATCH --job-name=mlp_training
-#SBATCH --output=mlp_training_%j.out
+#SBATCH --output=out/mlp_training_%j.out
 #SBATCH -p short
 #SBATCH -N 1
 #SBATCH --cpus-per-task=96

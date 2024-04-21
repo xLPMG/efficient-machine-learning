@@ -28,28 +28,31 @@ test_data = datasets.FashionMNIST(
     transform=ToTensor(),
 )
 
+# Visualize some images
 fig, axes = plt.subplots(2, 5, figsize=(10, 4))
 for ax, (image, label) in zip(axes.flatten(), training_data):
     ax.imshow(image.squeeze(), cmap="gray")
     ax.set_title(label)
     ax.axis("off")
 
-with PdfPages('image_visualizations.pdf') as pdf:
+with PdfPages('out/image_visualizations.pdf') as pdf:
     pdf.savefig(fig)
+plt.close()
     
-    
+# Create data loaders
 batch_size = 64
 train_dataloader = DataLoader(training_data, batch_size=batch_size)
 test_dataloader = DataLoader(test_data, batch_size=batch_size)
 
 #############################################################
-# TASK 4-2
+# TASK 4-2 and 4-3
 #############################################################
-print("################# TASK 4-2 #################")
+print("################# TASK 4-2 and 4-3 #################")
 
 import eml.mlp.trainer as trainer
 import eml.mlp.tester as tester
 import eml.mlp.model as model
+import eml.vis.fashion_mnist as visMNIST
 
 # set seed for reproducibility
 torch.manual_seed(123456789)
@@ -58,15 +61,12 @@ my_eml_model = model.Model()
 loss_func = torch.nn.CrossEntropyLoss()
 l_optimizer = torch.optim.SGD(my_eml_model.parameters(), lr=0.05)
 
-epochs = 20
+epochs = 25
+visualize = False
 
 for epoch in range(epochs):
     total_loss = trainer.train(loss_func, train_dataloader, my_eml_model, l_optimizer)
     test_loss, num_correct = tester.test(loss_func, test_dataloader, my_eml_model)
-    
     print(f"Epoch {epoch+1}/{epochs}, Total Loss: {total_loss}, Test loss: {test_loss}, Correct samples: {num_correct}")
-    
-#############################################################
-# TASK 4-3
-#############################################################
-print("################# TASK 4-3 #################")
+    if epoch % 5 == 0 and visualize == True:
+        visMNIST.plot(0, 32, test_dataloader, my_eml_model, f"out/vis_{epoch+1}.pdf")
