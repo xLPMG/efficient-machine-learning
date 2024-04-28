@@ -14,9 +14,9 @@ class TestMul( unittest.TestCase ):
   
   def test_backward( self ):
     ctx = context.Context()
-    l_result = Mul.forward( ctx,
-                            3.0,
-                            4.0 )
+    Mul.forward( ctx,
+                 3.0,
+                 4.0 )
     l_grad_a, l_grad_b = Mul.backward( ctx,
                                        5.0 )
     

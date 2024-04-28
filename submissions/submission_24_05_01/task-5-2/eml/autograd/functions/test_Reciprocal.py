@@ -13,8 +13,8 @@ class TestReciprocal( unittest.TestCase ):
   
   def test_backward( self ):
     ctx = context.Context()
-    l_result = Reciprocal.forward( ctx,
-                                   4.0 )
+    Reciprocal.forward( ctx,
+                        4.0 )
     l_grad_a = Reciprocal.backward( ctx,
                                     5.0 )
     l_result = -1/16 * 5.0

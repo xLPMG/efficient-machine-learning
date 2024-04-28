@@ -51,6 +51,20 @@ class Node:
                                             self.m_value,
                                             i_other.m_value )
     return l_node
+  
+  ## Returns a new node which represents the subtraction of the two input nodes.
+  # @param self first input node.
+  # @param i_other second input node.
+  # @return node representing the addition.
+  def __sub__( self,
+               i_other ):
+    l_node = Node()
+    l_node.m_grad_fn = functions.Add.backward
+    l_node.m_children = [self, i_other]
+    l_node.m_value = functions.Add.forward( l_node.m_ctx,
+                                            self.m_value,
+                                            - i_other.m_value )
+    return l_node
 
   ## Returns a new node which represents the multiplication of the two input nodes.
   # @param self first input node.
@@ -64,4 +78,48 @@ class Node:
     l_node.m_value = functions.Mul.forward( l_node.m_ctx,
                                             self.m_value,
                                             i_other.m_value )
+    return l_node
+    
+  ## Returns a new node which represents the scalar reciprocal of an input node.
+  # @param self input node.
+  # @return node representing the reciprocal.
+  def reciprocal( self ):
+    l_node = Node()
+    l_node.m_grad_fn = functions.Reciprocal.backward
+    l_node.m_children = [self]
+    l_node.m_value = functions.Reciprocal.forward( l_node.m_ctx,
+                                                   self.m_value )
+    return l_node
+  
+  ## Returns a new node which represents e^x on an input node.
+  # @param self input node.
+  # @return node representing e^x.
+  def exp( self ):
+    l_node = Node()
+    l_node.m_grad_fn = functions.Exp.backward
+    l_node.m_children = [self]
+    l_node.m_value = functions.Exp.forward( l_node.m_ctx,
+                                                   self.m_value )
+    return l_node
+  
+  ## Returns a new node which represents sin() operation on an input node.
+  # @param self input node.
+  # @return node representing sin().
+  def sin( self ):
+    l_node = Node()
+    l_node.m_grad_fn = functions.Sin.backward
+    l_node.m_children = [self]
+    l_node.m_value = functions.Sin.forward( l_node.m_ctx,
+                                            self.m_value )
+    return l_node
+  
+  ## Returns a new node which represents cos() operation on an input node.
+  # @param self input node.
+  # @return node representing cos().
+  def cos( self ):
+    l_node = Node()
+    l_node.m_grad_fn = functions.Cos.backward
+    l_node.m_children = [self]
+    l_node.m_value = functions.Cos.forward( l_node.m_ctx,
+                                            self.m_value )
     return l_node

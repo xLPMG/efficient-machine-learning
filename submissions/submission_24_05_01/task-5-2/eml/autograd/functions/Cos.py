@@ -1,12 +1,13 @@
-## Forward method which computes 1/a.
+import math
+
+## Forward method which computes cos(a)
 # @param i_ctx context object.
 # @param i_a node a.
-# @return result 1/a.
+# @return result .
 def forward( io_ctx,
              i_a ):
   io_ctx.save_for_backward( i_a )
-  l_result = 1.0 / i_a
-  return l_result
+  return math.cos( i_a )
 
 ## Backward method.
 # @param i_ctx context object.
@@ -15,5 +16,4 @@ def forward( io_ctx,
 def backward( i_ctx,
               i_grad ):
   l_a = i_ctx.m_saved_data
-  l_result = -1.0 / (l_a[0] * l_a[0]) * i_grad
-  return l_result
+  return -math.sin( l_a[0] ) * i_grad
