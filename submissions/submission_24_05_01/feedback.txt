@@ -1,4 +1,4 @@
-Viel zu umfrangreich.. alleine das ausrechnen der ganzen (Teil)Ableitungen hat Ewigkeiten gedauert.
+Die Woche waren die Aufgaben viel zu umfrangreich.. alleine das ausrechnen der ganzen (Teil)Ableitungen hat Ewigkeiten gedauert.
 
 Zu 5.2:
 "We see that Node defines the two functions __add__ and __sub__." Im Code ist aber  __add__ und __mul__ definiert.
