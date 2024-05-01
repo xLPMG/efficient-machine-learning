@@ -29,8 +29,11 @@ class Node:
     l_grad_children = self.m_grad_fn( self.m_ctx,
                                       i_grad )
 
-    for l_ch in range( len(self.m_children) ):
-      self.m_children[l_ch].backward( l_grad_children[l_ch] )
+    if len(self.m_children) > 1:
+      for l_ch in range( len(self.m_children) ):
+        self.m_children[l_ch].backward( l_grad_children[l_ch] )
+    elif len(self.m_children) > 0:
+      self.m_children[0].backward( l_grad_children )
 
   ## Zeroes the grad of the node and all children.
   def zero_grad( self ):

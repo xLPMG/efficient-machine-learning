@@ -5,8 +5,7 @@
 def forward( io_ctx,
              i_a ):
   io_ctx.save_for_backward( i_a )
-  l_result = 1.0 / i_a
-  return l_result
+  return 1.0 / i_a
 
 ## Backward method.
 # @param i_ctx context object.

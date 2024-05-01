@@ -1,0 +1,7 @@
+Viel zu umfrangreich.. alleine das ausrechnen der ganzen (Teil)Ableitungen hat Ewigkeiten gedauert.
+
+Zu 5.2:
+"We see that Node defines the two functions __add__ and __sub__." Im Code ist aber  __add__ und __mul__ definiert.
+
+Es soll "__truediv__" überschrieben werden, welches wie für eine Division üblich 2 Inputwerte bekommt. Das Reziproke 1/x hat aber nur einen Input: x.
+Wie überschreibt man das dann?
