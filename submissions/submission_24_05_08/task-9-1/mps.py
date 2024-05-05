@@ -2,7 +2,7 @@
 import torch
 from torch import nn
 
-print("############## TASK 9-1-1 ##############")
+print("############## TASK 9-1-1 MPS ##############")
 if torch.backends.mps.is_available():
     print( "MPS is available" )
     mps_device = torch.device("mps")
@@ -19,7 +19,7 @@ if torch.backends.mps.is_available():
 else:
     print( "Error: MPS is not available" )
     
-print("############## TASK 9-1-2 ##############")
+print("############## TASK 9-1-2 MPS ##############")
 if torch.backends.mps.is_available():
     print( "MPS is available" )
     mps_device = torch.device("mps")
