@@ -45,7 +45,18 @@ class MixerLayer():
 
 class Mixer():
     def __init__( self,
-                  num_layers ):
+                  num_layers,
+                  cuda = False,
+                  dtype = torch.float32,
+                  tf32 = False ):
+        if cuda == True:
+            self.device = torch.device('cuda')
+        else:
+            self.device = torch.device("cpu")
+            
+        self.dtype = dtype
+        torch.backends.cuda.matmul.allow_tf32 = tf32
+        
         self.tensors = {}
         self.mixer_layers = [ MixerLayer() for _ in range( num_layers ) ]
     
@@ -53,34 +64,36 @@ class Mixer():
                          path_parameters ):
         pars = numpy.load( path_parameters )
 
-        self.tensors['stem.weight'] = torch.tensor( pars['stem/kernel'] )
+        self.tensors['stem.weight'] = torch.tensor( pars['stem/kernel'], device = self.device, dtype = self.dtype )
         self.tensors['stem.weight'] = self.tensors['stem.weight'].view( -1, self.tensors['stem.weight'].size()[-1] )
-        self.tensors['stem.bias']   = torch.tensor( pars['stem/bias'] )
+        self.tensors['stem.bias']   = torch.tensor( pars['stem/bias'], device = self.device, dtype = self.dtype )
 
         for la in range( len( self.mixer_layers ) ):
-            self.mixer_layers[la].tensors = { 'ln1.weight':            torch.tensor( pars[f'MixerBlock_{la}/LayerNorm_0/scale'] ),
-                                              'ln1.bias':              torch.tensor( pars[f'MixerBlock_{la}/LayerNorm_0/bias'] ),
-                                              'ln2.weight':            torch.tensor( pars[f'MixerBlock_{la}/LayerNorm_1/scale'] ),
-                                              'ln2.bias':              torch.tensor( pars[f'MixerBlock_{la}/LayerNorm_1/bias'] ),
-                                              'mlp_tokens.0.weight':   torch.tensor( pars[f'MixerBlock_{la}/token_mixing/Dense_0/kernel'] ).transpose( 0, 1 ).unsqueeze(0).contiguous(),
-                                              'mlp_tokens.0.bias':     torch.tensor( pars[f'MixerBlock_{la}/token_mixing/Dense_0/bias'] ).unsqueeze(-1),
-                                              'mlp_tokens.2.weight':   torch.tensor( pars[f'MixerBlock_{la}/token_mixing/Dense_1/kernel'] ).transpose( 0, 1 ).unsqueeze(0).contiguous(),
-                                              'mlp_tokens.2.bias':     torch.tensor( pars[f'MixerBlock_{la}/token_mixing/Dense_1/bias'] ).unsqueeze(-1),
-                                              'mlp_channels.0.weight': torch.tensor( pars[f'MixerBlock_{la}/channel_mixing/Dense_0/kernel'] ),
-                                              'mlp_channels.0.bias':   torch.tensor( pars[f'MixerBlock_{la}/channel_mixing/Dense_0/bias'] ),
-                                              'mlp_channels.2.weight': torch.tensor( pars[f'MixerBlock_{la}/channel_mixing/Dense_1/kernel'] ),
-                                              'mlp_channels.2.bias':   torch.tensor( pars[f'MixerBlock_{la}/channel_mixing/Dense_1/bias'] ) }
+            self.mixer_layers[la].tensors = { 'ln1.weight':            torch.tensor( pars[f'MixerBlock_{la}/LayerNorm_0/scale'], device = self.device, dtype = self.dtype ),
+                                              'ln1.bias':              torch.tensor( pars[f'MixerBlock_{la}/LayerNorm_0/bias'], device = self.device, dtype = self.dtype ),
+                                              'ln2.weight':            torch.tensor( pars[f'MixerBlock_{la}/LayerNorm_1/scale'], device = self.device, dtype = self.dtype ),
+                                              'ln2.bias':              torch.tensor( pars[f'MixerBlock_{la}/LayerNorm_1/bias'], device = self.device, dtype = self.dtype ),
+                                              'mlp_tokens.0.weight':   torch.tensor( pars[f'MixerBlock_{la}/token_mixing/Dense_0/kernel'], device = self.device, dtype = self.dtype ).transpose( 0, 1 ).unsqueeze(0).contiguous(),
+                                              'mlp_tokens.0.bias':     torch.tensor( pars[f'MixerBlock_{la}/token_mixing/Dense_0/bias'], device = self.device, dtype = self.dtype ).unsqueeze(-1),
+                                              'mlp_tokens.2.weight':   torch.tensor( pars[f'MixerBlock_{la}/token_mixing/Dense_1/kernel'], device = self.device, dtype = self.dtype ).transpose( 0, 1 ).unsqueeze(0).contiguous(),
+                                              'mlp_tokens.2.bias':     torch.tensor( pars[f'MixerBlock_{la}/token_mixing/Dense_1/bias'], device = self.device, dtype = self.dtype ).unsqueeze(-1),
+                                              'mlp_channels.0.weight': torch.tensor( pars[f'MixerBlock_{la}/channel_mixing/Dense_0/kernel'], device = self.device, dtype = self.dtype ),
+                                              'mlp_channels.0.bias':   torch.tensor( pars[f'MixerBlock_{la}/channel_mixing/Dense_0/bias'], device = self.device, dtype = self.dtype ),
+                                              'mlp_channels.2.weight': torch.tensor( pars[f'MixerBlock_{la}/channel_mixing/Dense_1/kernel'], device = self.device, dtype = self.dtype ),
+                                              'mlp_channels.2.bias':   torch.tensor( pars[f'MixerBlock_{la}/channel_mixing/Dense_1/bias'], device = self.device, dtype = self.dtype ) }
 
-        self.tensors['ln.weight'] = torch.tensor( pars['pre_head_layer_norm/scale'] )
-        self.tensors['ln.bias']   = torch.tensor( pars['pre_head_layer_norm/bias'] )
+        self.tensors['ln.weight'] = torch.tensor( pars['pre_head_layer_norm/scale'], device = self.device, dtype = self.dtype )
+        self.tensors['ln.bias']   = torch.tensor( pars['pre_head_layer_norm/bias'], device = self.device, dtype = self.dtype )
  
-        self.tensors['head.weight'] = torch.tensor( pars['head/kernel'] )
-        self.tensors['head.bias']   = torch.tensor( pars['head/bias'] )
+        self.tensors['head.weight'] = torch.tensor( pars['head/kernel'], device = self.device, dtype = self.dtype )
+        self.tensors['head.bias']   = torch.tensor( pars['head/bias'], device = self.device, dtype = self.dtype )
 
     def eval( self ):
         pass
 
     def forward( self, x ):
+        x = x.to( self.device, self.dtype )
+        
         #           0          1          2              3   4              5
         x = x.view( x.size(0), x.size(1), x.size(2)//16, 16, x.size(3)//16, 16 )
         x = x.permute( 0, 2, 4, 3, 5, 1 ).contiguous()

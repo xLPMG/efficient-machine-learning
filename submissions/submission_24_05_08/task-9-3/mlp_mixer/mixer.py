@@ -18,11 +18,12 @@ if __name__ == '__main__':
                'mlp_dim_ds':      384,
                'num_layers':      12,
                'path_data':       '/mnt/hd1/data/imagenet/ilsvrc_2012',
-               'batch_size':      64,
+               'batch_size':      256,
                'num_synthetic':   1,
                'model_impl':      'torchfunc',
-               'dtype':           torch.float32,
-               'cuda':            False }
+               'dtype':           torch.float16,
+               'cuda':            True,
+               'tf32':            False }
 
     # L/16
     # config = { 'path_parameters': '/mnt/hd1/data/mixer_models/imagenet1k/imagenet1k_Mixer-L_16.npz',
@@ -54,7 +55,10 @@ if __name__ == '__main__':
                                       mlp_dim_ds    = config['mlp_dim_ds'],
                                       num_layers    = config['num_layers'] )
     elif config['model_impl'] == 'torchfunc':
-        mixer = models.torchfunc.Mixer( num_layers = config['num_layers'] )
+        mixer = models.torchfunc.Mixer( num_layers = config['num_layers'],
+                                        cuda = config['cuda'],
+                                        dtype = config['dtype'],
+                                        tf32 = config['tf32'] )
     else:
         raise ValueError( "Unknown model implementation" )
 
@@ -128,6 +132,7 @@ if __name__ == '__main__':
         with torch.no_grad():
             output = mixer( batch )
 
+        output = output.to('cpu')
         num_samples += len(labels)
         num_top1_correct += (output.argmax(-1) == labels).sum().item()
         num_top5_correct += (output.topk(5, dim=1).indices == labels.unsqueeze(1)).sum().item()

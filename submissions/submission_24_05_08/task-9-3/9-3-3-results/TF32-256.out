@@ -1,0 +1,133 @@
+*************************
+*** Running MLP Mixer ***
+*************************
+{'batch_size': 256,
+ 'cuda': True,
+ 'dtype': torch.float32,
+ 'hidden_size_c': 768,
+ 'mlp_dim_dc': 3072,
+ 'mlp_dim_ds': 384,
+ 'model_impl': 'torchfunc',
+ 'num_layers': 12,
+ 'num_synthetic': 1,
+ 'path_data': '/mnt/hd1/data/imagenet/ilsvrc_2012',
+ 'path_parameters': '/mnt/hd1/data/mixer_models/imagenet1k/imagenet1k_Mixer-B_16.npz',
+ 'seq_len_s': 196,
+ 'tf32': True}
+Creating model
+Loading parameters
+Setting up data loader
+Preparing model for execution
+***********************************************
+*** Running synthetic performance benchmark ***
+***********************************************
+Warming up..
+Benchmarking..
+  Time per batch:  0.01379251480102539
+  Time per sample: 5.387701094150543e-05
+*****************************************************
+*** Running inference on ImageNet validation data ***
+*****************************************************
+  Finished batch / sample: 0 / 256
+    Time per batch:  0.3342461585998535
+    Time per sample: 0.0013056490570306778
+    Top-1 accuracy:  0.90625
+    Top-5 accuracy:  0.9609375
+  Finished batch / sample: 10 / 2816
+    Time per batch:  0.36031270027160645
+    Time per sample: 0.0014074714854359627
+    Top-1 accuracy:  0.8267045454545454
+    Top-5 accuracy:  0.9499289772727273
+  Finished batch / sample: 20 / 5376
+    Time per batch:  0.3612477779388428
+    Time per sample: 0.0014111241325736046
+    Top-1 accuracy:  0.8270089285714286
+    Top-5 accuracy:  0.9497767857142857
+  Finished batch / sample: 30 / 7936
+    Time per batch:  0.3612658977508545
+    Time per sample: 0.0014111949130892754
+    Top-1 accuracy:  0.8379536290322581
+    Top-5 accuracy:  0.9516129032258065
+  Finished batch / sample: 40 / 10496
+    Time per batch:  0.28579115867614746
+    Time per sample: 0.001116371713578701
+    Top-1 accuracy:  0.8180259146341463
+    Top-5 accuracy:  0.9493140243902439
+  Finished batch / sample: 50 / 13056
+    Time per batch:  0.2861306667327881
+    Time per sample: 0.0011176979169249535
+    Top-1 accuracy:  0.8153339460784313
+    Top-5 accuracy:  0.9501378676470589
+  Finished batch / sample: 60 / 15616
+    Time per batch:  0.2855982780456543
+    Time per sample: 0.001115618273615837
+    Top-1 accuracy:  0.8121798155737705
+    Top-5 accuracy:  0.9506915983606558
+  Finished batch / sample: 70 / 18176
+    Time per batch:  0.28566503524780273
+    Time per sample: 0.0011158790439367294
+    Top-1 accuracy:  0.8167363556338029
+    Top-5 accuracy:  0.9525198063380281
+  Finished batch / sample: 80 / 20736
+    Time per batch:  0.28579258918762207
+    Time per sample: 0.0011163773015141487
+    Top-1 accuracy:  0.8134162808641975
+    Top-5 accuracy:  0.9500385802469136
+  Finished batch / sample: 90 / 23296
+    Time per batch:  0.2854194641113281
+    Time per sample: 0.0011149197816848755
+    Top-1 accuracy:  0.8026699862637363
+    Top-5 accuracy:  0.9436813186813187
+  Finished batch / sample: 100 / 25856
+    Time per batch:  0.285724401473999
+    Time per sample: 0.0011161109432578087
+    Top-1 accuracy:  0.7911509900990099
+    Top-5 accuracy:  0.9375386757425742
+  Finished batch / sample: 110 / 28416
+    Time per batch:  0.28461527824401855
+    Time per sample: 0.0011117784306406975
+    Top-1 accuracy:  0.7883938626126126
+    Top-5 accuracy:  0.9358108108108109
+  Finished batch / sample: 120 / 30976
+    Time per batch:  0.28669095039367676
+    Time per sample: 0.0011198865249752998
+    Top-1 accuracy:  0.7859310433884298
+    Top-5 accuracy:  0.9330449380165289
+  Finished batch / sample: 130 / 33536
+    Time per batch:  0.28595829010009766
+    Time per sample: 0.0011170245707035065
+    Top-1 accuracy:  0.7778208492366412
+    Top-5 accuracy:  0.9295980438931297
+  Finished batch / sample: 140 / 36096
+    Time per batch:  0.2867615222930908
+    Time per sample: 0.001120162196457386
+    Top-1 accuracy:  0.7753490691489362
+    Top-5 accuracy:  0.9275820035460993
+  Finished batch / sample: 150 / 38656
+    Time per batch:  0.28548216819763184
+    Time per sample: 0.0011151647195219994
+    Top-1 accuracy:  0.7717301324503312
+    Top-5 accuracy:  0.9252638658940397
+  Finished batch / sample: 160 / 41216
+    Time per batch:  0.2863900661468506
+    Time per sample: 0.001118711195886135
+    Top-1 accuracy:  0.7693128881987578
+    Top-5 accuracy:  0.923233695652174
+  Finished batch / sample: 170 / 43776
+    Time per batch:  0.2859835624694824
+    Time per sample: 0.0011171232908964157
+    Top-1 accuracy:  0.7658762792397661
+    Top-5 accuracy:  0.9213495979532164
+  Finished batch / sample: 180 / 46336
+    Time per batch:  0.2855417728424072
+    Time per sample: 0.0011153975501656532
+    Top-1 accuracy:  0.7630568024861878
+    Top-5 accuracy:  0.9198679212707183
+  Finished batch / sample: 190 / 48896
+    Time per batch:  0.28580498695373535
+    Time per sample: 0.0011164257302880287
+    Top-1 accuracy:  0.7636411976439791
+    Top-5 accuracy:  0.9206479057591623
+  Samples: 50000
+  Top-1 accuracy: 0.76484
+  Top-5 accuracy: 0.92124
