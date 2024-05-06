@@ -1,0 +1,23 @@
+## Notes: ##
+The program output can be found in nohup.out
+
+I canceled the CPU-FP16-10240 run after 4 hours.
+It seems like on the CPU, FP16 is extremely slow and there would not have
+been any good result, since the GFLOPS would have been close to zero.
+The length of the whole benchmark is therefore excluding the time of that run.
+A possible explanation for this could be that FP16 is not natively supported
+on the CPU and the software implementation is really slow. Source for this
+claim: https://github.com/ultralytics/ultralytics/issues/1719
+
+#################################################################################
+Some estimates for CPU-FP16-10240:
+First, find a rough estimate for the time it would have taken:
+CPU-FP16-2048 => 45s
+CPU-FP16-4096 => 387s (*8.6 increase)
+CPU-FP16-8192 => 4409s (*11.4 increase)
+I will assume another *11.4 increase as a lower bound:
+CPU-FP16-10240 ~> 50.200s = 836min ~ almost 14 hours
+
+flops = 2 * 10240^(3) * 1 = 2147483648000
+ops = 2147483648000 / 50.200s = 42.778.558,7250996016
+gflops = 0,0427785587
