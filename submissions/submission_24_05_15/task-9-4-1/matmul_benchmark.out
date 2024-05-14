@@ -1,0 +1,87 @@
+(triton) (pytorch_cuda) eml_17@murray:~/efficient-machine-learning$ /mnt/hd1/venvs/pytorch_cuda/bin/python /mnt/hd2/home/eml_17/efficient-machine-learning/submissions/submission_24_05_15/matmul_benchmark.py
+##########################################################
+FLOAT32
+##########################################################
+========================================================
+Completed benchmark:
+ Matrix sizes:
+     M: 32
+     N: 32
+     K: 32
+ Data type:       torch.float32
+ Number of runs:  1000
+ Time torch:      0.04393983840942383 seconds
+ Time triton:     8.373981237411499 seconds
+========================================================
+Completed benchmark:
+ Matrix sizes:
+     M: 256
+     N: 256
+     K: 256
+ Data type:       torch.float32
+ Number of runs:  1000
+ Time torch:      0.028404544830322266 seconds
+ Time triton:     0.6888723373413086 seconds
+========================================================
+Completed benchmark:
+ Matrix sizes:
+     M: 4096
+     N: 4096
+     K: 4096
+ Data type:       torch.float32
+ Number of runs:  1000
+ Time torch:      5.25583056640625 seconds
+ Time triton:     2.6185860633850098 seconds
+========================================================
+Completed benchmark:
+ Matrix sizes:
+     M: 8192
+     N: 8192
+     K: 8192
+ Data type:       torch.float32
+ Number of runs:  1000
+ Time torch:      42.93875390625 seconds
+ Time triton:     15.17183542251587 seconds
+##########################################################
+FLOAT16
+##########################################################
+========================================================
+Completed benchmark:
+ Matrix sizes:
+     M: 32
+     N: 32
+     K: 32
+ Data type:       torch.float16
+ Number of runs:  1000
+ Time torch:      0.051431198120117184 seconds
+ Time triton:     6.803450345993042 seconds
+========================================================
+Completed benchmark:
+ Matrix sizes:
+     M: 256
+     N: 256
+     K: 256
+ Data type:       torch.float16
+ Number of runs:  1000
+ Time torch:      0.019212575912475587 seconds
+ Time triton:     1.2198762893676758 seconds
+========================================================
+Completed benchmark:
+ Matrix sizes:
+     M: 4096
+     N: 4096
+     K: 4096
+ Data type:       torch.float16
+ Number of runs:  1000
+ Time torch:      1.7477335205078126 seconds
+ Time triton:     2.2840487957000732 seconds
+========================================================
+Completed benchmark:
+ Matrix sizes:
+     M: 8192
+     N: 8192
+     K: 8192
+ Data type:       torch.float16
+ Number of runs:  1000
+ Time torch:      13.1306494140625 seconds
+ Time triton:     8.56838870048523 seconds
