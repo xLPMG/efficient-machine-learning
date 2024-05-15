@@ -1,4 +1,4 @@
-(triton) (pytorch_cuda) eml_17@murray:~/efficient-machine-learning$ /mnt/hd1/venvs/pytorch_cuda/bin/python /mnt/hd2/home/eml_17/efficient-machine-learning/submissions/submission_24_05_15/matmul_benchmark.py
+(triton) (pytorch_cuda) eml_17@murray:~/efficient-machine-learning$ /mnt/hd1/venvs/pytorch_cuda/bin/python /mnt/hd2/home/eml_17/efficient-machine-learning/submissions/submission_24_05_15/matmul_benchmark_time.py
 ##########################################################
 FLOAT32
 ##########################################################
