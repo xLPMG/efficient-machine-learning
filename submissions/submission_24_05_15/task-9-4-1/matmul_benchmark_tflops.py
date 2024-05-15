@@ -2,7 +2,7 @@ from triton_matmul import matmul
 import torch
 import time
 
-run_time = 10 # minimum run time in seconds
+run_time = 120 # minimum run time in seconds
 
 def benchmark(N, dtype):
     a = torch.randn((N, N), device='cuda', dtype=dtype)
@@ -20,6 +20,7 @@ def benchmark(N, dtype):
     while elapsed_time_ms < run_time*1000:   
         c1 += torch.matmul(a, b)
         repetitions+=1
+        end1.record()
         torch.cuda.synchronize()
         elapsed_time_ms = start1.elapsed_time(end1)
         
@@ -51,15 +52,15 @@ def benchmark(N, dtype):
 print("##########################################################")
 print("FLOAT32")
 print("##########################################################")
-benchmark(32, 32, 32, 1000, torch.float32)
-benchmark(256, 256, 256, 1000, torch.float32)
-benchmark(4096, 4096, 4096, 1000, torch.float32)
-benchmark(8192, 8192, 8192, 1000, torch.float32)
+benchmark(32, torch.float32)
+benchmark(256, torch.float32)
+benchmark(4096, torch.float32)
+benchmark(8192, torch.float32)
 
 print("##########################################################")
 print("FLOAT16")
 print("##########################################################")
-benchmark(32, 32, 32, 1000, torch.float16)
-benchmark(256, 256, 256, 1000, torch.float16)
-benchmark(4096, 4096, 4096, 1000, torch.float16)
-benchmark(8192, 8192, 8192, 1000, torch.float16)
+benchmark(32, torch.float16)
+benchmark(256, torch.float16)
+benchmark(4096, torch.float16)
+benchmark(8192, torch.float16)

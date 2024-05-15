@@ -1,0 +1,54 @@
+##########################################################
+FLOAT32
+##########################################################
+========================================================
+Completed benchmark:
+ Matrix size:     32  *  32
+ Data type:       torch.float32
+ TFLOP/s torch:   0.0028736898743549643
+ TFLOP/s triton:  0.00128139272023389
+========================================================
+Completed benchmark:
+ Matrix size:     256  *  256
+ Data type:       torch.float32
+ TFLOP/s torch:   1.3850397114368
+ TFLOP/s triton:  0.6932827231697779
+========================================================
+Completed benchmark:
+ Matrix size:     4096  *  4096
+ Data type:       torch.float32
+ TFLOP/s torch:   25.200713755362635
+ TFLOP/s triton:  37.019517643877464
+========================================================
+Completed benchmark:
+ Matrix size:     8192  *  8192
+ Data type:       torch.float32
+ TFLOP/s torch:   25.10686325968161
+ TFLOP/s triton:  44.16364623856047
+##########################################################
+FLOAT16
+##########################################################
+========================================================
+Completed benchmark:
+ Matrix size:     32  *  32
+ Data type:       torch.float16
+ TFLOP/s torch:   0.0031091070293333333
+ TFLOP/s triton:  0.0012840620631972702
+========================================================
+Completed benchmark:
+ Matrix size:     256  *  256
+ Data type:       torch.float16
+ TFLOP/s torch:   1.6038652193450667
+ TFLOP/s triton:  0.6859644438662644
+========================================================
+Completed benchmark:
+ Matrix size:     4096  *  4096
+ Data type:       torch.float16
+ TFLOP/s torch:   78.29428854886112
+ TFLOP/s triton:  79.42681544050824
+========================================================
+Completed benchmark:
+ Matrix size:     8192  *  8192
+ Data type:       torch.float16
+ TFLOP/s torch:   83.21621780155652
+ TFLOP/s triton:  87.07227818981933
