@@ -1,0 +1,2 @@
+/opt/miniconda3/bin/conda init
+conda activate /mnt/hd1/conda/aimet/
