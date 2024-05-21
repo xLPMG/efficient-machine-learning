@@ -1,0 +1,14 @@
+OUTPUT OF "task-10-2.py":
+
+(aimet) (base) eml_17@murray:~/efficient-machine-learning/submissions/submission_24_05_23/10-2/fashionMNIST-SUBMISSION$ python task-10-2.py 
+Got 8818 / 10000 with accuracy 88.18
+2024-05-21 18:22:22,863 - root - INFO - AIMET
+2024-05-21 18:22:25,064 - Quant - INFO - No config file provided, defaulting to config file at /mnt/hd1/conda/aimet/lib/python3.8/site-packages/aimet_common/quantsim_config/default_config.json
+2024-05-21 18:22:25,077 - Quant - INFO - Unsupported op type Squeeze
+2024-05-21 18:22:25,077 - Quant - INFO - Unsupported op type Mean
+2024-05-21 18:22:25,078 - Utils - INFO - ...... subset to store [Gemm_1, Relu_2]
+2024-05-21 18:22:25,078 - Utils - INFO - ...... subset to store [Gemm_3, Relu_4]
+2024-05-21 18:22:25,078 - Quant - INFO - Selecting DefaultOpInstanceConfigGenerator to compute the specialized config. hw_version:default
+Got 8807 / 10000 with accuracy 88.07
+
+=> The accuracy went down from 8818 / 10000 to 8807 / 10000 correct samples after quantization.

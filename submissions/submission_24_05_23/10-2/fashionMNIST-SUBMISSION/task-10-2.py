@@ -1,30 +1,13 @@
-# external imports
 import torch
-from torch import nn
 from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision.transforms import ToTensor
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_pdf import PdfPages
-from pathlib import Path
 
-# internal imports
-import eml.mlp.trainer as trainer
-import eml.mlp.tester as tester
-import eml.mlp.model as model
-import eml.vis.fashion_mnist as visMNIST
+# the model which was trained in submission_24_04_24
+# I saved it using "torch.save(my_eml_model, "fashionmnistmodel")"
+my_eml_model = torch.load("fashionmnistmodel")
 
-Path("out").mkdir(exist_ok=True)
-
-# Download training data from open datasets.
-training_data = datasets.FashionMNIST(
-    root="data",
-    train=True,
-    download=True,
-    transform=ToTensor(),
-)
-
-# Download test data from open datasets.
+# Download test data from open datasets
 test_data = datasets.FashionMNIST(
     root="data",
     train=False,
@@ -32,28 +15,27 @@ test_data = datasets.FashionMNIST(
     transform=ToTensor(),
 )
 
-# # Visualize some images
-# fig, axes = plt.subplots(2, 5, figsize=(10, 4))
-# for ax, (image, label) in zip(axes.flatten(), training_data):
-#     ax.imshow(image.squeeze(), cmap="gray")
-#     ax.set_title(label)
-#     ax.axis("off")
-
-# with PdfPages('out/image_visualizations.pdf') as pdf:
-#     pdf.savefig(fig)
-# plt.close()
-    
-# Create data loaders
 batch_size = 64
-train_dataloader = DataLoader(training_data, batch_size=batch_size)
 test_dataloader = DataLoader(test_data, batch_size=batch_size)
 
-# set seed for reproducibility
-torch.manual_seed(123456789)
+def check_accuracy(loader, model):
+    num_correct = 0
+    num_samples = 0
+    model.eval()
     
-my_eml_model = model.Model()
-loss_func = torch.nn.CrossEntropyLoss()
-l_optimizer = torch.optim.SGD(my_eml_model.parameters(), lr=0.05)
+    with torch.no_grad():
+        for instances, labels in loader:            
+            scores = model(instances)
+            _, predictions = scores.max(1)
+            num_correct += (predictions == labels).sum()
+            num_samples += predictions.size(0)
+        
+        print(f'Got {num_correct} / {num_samples} with accuracy {float(num_correct)/float(num_samples)*100:.2f}') 
+    
+    model.train()
+
+# check the accuracy of the model before quantization
+check_accuracy(test_dataloader, my_eml_model)
 
 # START OF AIMET QUANTIZATION
 import aimet_common.defs
@@ -61,14 +43,25 @@ import aimet_torch.quantsim
 
 def calibrate(io_model, args, i_use_cuda=False):
     dataloader = args
-    io_model.eval()  # Set model to evaluation mode
-    with torch.no_grad():
-        for inputs, _ in dataloader:
-            if i_use_cuda:
-                inputs = inputs.cuda()
-            io_model(inputs)
+    batch_size = dataloader.batch_size
+    if i_use_cuda:
+        device = torch.device('cuda')
+    else:
+        device = torch.device('cpu')
 
-dummy_input = torch.rand(1, 1, 28, 28)
+    io_model.eval()
+    samples = 1000
+    batch_cntr = 0
+    with torch.no_grad():
+        for input_data, _ in dataloader:
+
+            inputs_batch = input_data.to(device)
+            io_model(inputs_batch)
+            batch_cntr += 1
+            if (batch_cntr * batch_size) > samples:
+                break
+
+dummy_input = torch.rand(1, 1, 28, 28) # input shape for FashionMNIST
 sim = aimet_torch.quantsim.QuantizationSimModel(
     my_eml_model, 
     quant_scheme=aimet_common.defs.QuantScheme.post_training_tf, 
@@ -79,17 +72,10 @@ sim = aimet_torch.quantsim.QuantizationSimModel(
 
 sim.compute_encodings(
     forward_pass_callback=calibrate, 
-    forward_pass_callback_args=train_dataloader
+    forward_pass_callback_args=test_dataloader
 )
 
 # END OF AIMET QUANTIZATION
 
-epochs = 26
-visualize = False
-
-for epoch in range(epochs):
-    total_loss = trainer.train(loss_func, train_dataloader, sim.model, l_optimizer)
-    test_loss, num_correct = tester.test(loss_func, test_dataloader, sim.model)
-    print(f"Epoch {epoch}/{epochs-1}, Total Loss: {total_loss}, Test loss: {test_loss}, Correct samples: {num_correct}")
-    if epoch % 5 == 0 and visualize == True:
-        visMNIST.plot(0, 1000, test_dataloader, my_eml_model, f"out/vis_{epoch}.pdf")
+# check the accuracy of the model after quantization
+check_accuracy(test_dataloader, sim.model)

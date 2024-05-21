@@ -110,8 +110,8 @@ dummy_input = torch.rand_like(inputs)
 sim = aimet_torch.quantsim.QuantizationSimModel(model, 
                                                 quant_scheme=aimet_common.defs.QuantScheme.post_training_tf,
                                                 dummy_input=dummy_input,
-                                                default_param_bw=4,
-                                                default_output_bw=4)
+                                                default_param_bw=8,
+                                                default_output_bw=8)
   
 sim.compute_encodings(forward_pass_callback=calibrate,
                       forward_pass_callback_args=inputs)

@@ -65,7 +65,7 @@ loss_func = torch.nn.CrossEntropyLoss()
 l_optimizer = torch.optim.SGD(my_eml_model.parameters(), lr=0.05)
 
 epochs = 26
-visualize = True
+visualize = False
 
 for epoch in range(epochs):
     total_loss = trainer.train(loss_func, train_dataloader, my_eml_model, l_optimizer)
@@ -73,3 +73,5 @@ for epoch in range(epochs):
     print(f"Epoch {epoch}/{epochs-1}, Total Loss: {total_loss}, Test loss: {test_loss}, Correct samples: {num_correct}")
     if epoch % 5 == 0 and visualize == True:
         visMNIST.plot(0, 1000, test_dataloader, my_eml_model, f"out/vis_{epoch}.pdf")
+        
+torch.save(my_eml_model, "mymodel")
