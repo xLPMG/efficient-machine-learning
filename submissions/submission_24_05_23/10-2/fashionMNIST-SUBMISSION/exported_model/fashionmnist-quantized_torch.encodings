@@ -1,0 +1,99 @@
+{
+    "activation_encodings": {
+        "flatten": {
+            "input": {
+                "0": {
+                    "bitwidth": 8,
+                    "dtype": "int",
+                    "is_symmetric": "False",
+                    "max": 1.0,
+                    "min": 0.0,
+                    "offset": 0,
+                    "scale": 0.00392156862745098
+                }
+            },
+            "output": {
+                "0": {
+                    "bitwidth": 8,
+                    "dtype": "int",
+                    "is_symmetric": "False",
+                    "max": 1.0,
+                    "min": 0.0,
+                    "offset": 0,
+                    "scale": 0.00392156862745098
+                }
+            }
+        },
+        "linear3": {
+            "output": {
+                "0": {
+                    "bitwidth": 8,
+                    "dtype": "int",
+                    "is_symmetric": "False",
+                    "max": 33.398175894045366,
+                    "min": -15.830349267697802,
+                    "offset": -82,
+                    "scale": 0.19305303984997318
+                }
+            }
+        },
+        "relu": {
+            "output": {
+                "0": {
+                    "bitwidth": 8,
+                    "dtype": "int",
+                    "is_symmetric": "False",
+                    "max": 3.8855180740356445,
+                    "min": 0.0,
+                    "offset": 0,
+                    "scale": 0.015237325780531939
+                }
+            }
+        }
+    },
+    "excluded_layers": [],
+    "param_encodings": {
+        "linear1.weight": [
+            {
+                "bitwidth": 8,
+                "dtype": "int",
+                "is_symmetric": "True",
+                "max": 0.25870466232299805,
+                "min": -0.2607417069082185,
+                "offset": -128,
+                "scale": 0.002037044585220457
+            }
+        ],
+        "linear2.weight": [
+            {
+                "bitwidth": 8,
+                "dtype": "int",
+                "is_symmetric": "True",
+                "max": 0.17554691433906555,
+                "min": -0.1769291735070897,
+                "offset": -128,
+                "scale": 0.0013822591680241383
+            }
+        ],
+        "linear3.weight": [
+            {
+                "bitwidth": 8,
+                "dtype": "int",
+                "is_symmetric": "True",
+                "max": 0.585261881351471,
+                "min": -0.589870242621955,
+                "offset": -128,
+                "scale": 0.004608361270484023
+            }
+        ]
+    },
+    "quantizer_args": {
+        "activation_bitwidth": 8,
+        "dtype": "int",
+        "is_symmetric": true,
+        "param_bitwidth": 8,
+        "per_channel_quantization": false,
+        "quant_scheme": "post_training_tf"
+    },
+    "version": "0.6.1"
+}

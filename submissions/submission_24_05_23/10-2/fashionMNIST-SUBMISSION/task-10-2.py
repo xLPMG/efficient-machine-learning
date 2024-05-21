@@ -79,3 +79,7 @@ sim.compute_encodings(
 
 # check the accuracy of the model after quantization
 check_accuracy(test_dataloader, sim.model)
+
+# export
+sim.export("exported_model", filename_prefix="fashionmnist-quantized", dummy_input=dummy_input)
+torch.save(sim.model, "exported_model/fashionmnist-quantized-torchmodel")
