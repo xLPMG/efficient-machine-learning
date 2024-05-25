@@ -1,0 +1,14 @@
+BATCH ACCURACY_HOST ACCURACY_KRYO
+0     56.25%        56.25%
+1     71.875%       71.875%
+2     53.125%       53.125%
+3     71.875%       71.875%
+4     65.625%       65.625%
+5     71.875%       71.875%
+6     71.875%       71.875%
+7     65.625%       65.625%
+8     65.625%       65.625%
+9     71.875%       71.875%
+
+It can be seen that accuries are exactly the same
+when running on Host CPU and Kryo.
