@@ -1,0 +1,39 @@
+Output of "interpret_data.py":
+
+(ai_direct) eml_17@LeChuck:~/efficient-machine-learning/submissions/submission_24_05_29/11-1-host$ python interpret_data.py 
+==============================
+Result  0
+Accuracy:  56.25 %
+==============================
+Result  1
+Accuracy:  71.875 %
+==============================
+Result  2
+Accuracy:  53.125 %
+==============================
+Result  3
+Accuracy:  71.875 %
+==============================
+Result  4
+Accuracy:  65.625 %
+==============================
+Result  5
+Accuracy:  71.875 %
+==============================
+Result  6
+Accuracy:  71.875 %
+==============================
+Result  7
+Accuracy:  65.625 %
+==============================
+Result  8
+Accuracy:  65.625 %
+==============================
+Result  9
+Accuracy:  71.875 %
+
+Conclusion:
+All results are roughly located around the given "68.4%" accuracy.
+Only batch 0 and 2 seem a little inaccurate but the other batches performed as expected.
+
+Note: You may set "printValues" to True to view the predicted classes for the 32 samples.
