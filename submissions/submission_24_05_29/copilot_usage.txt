@@ -1,0 +1,3 @@
+In this submission I used GitHub Copilot (Version: 1.195.0), specifically to
+write the "read_raw" and "read_csv" functions of the "interpret_data.py" file.
+The generated code worked perfectly.
