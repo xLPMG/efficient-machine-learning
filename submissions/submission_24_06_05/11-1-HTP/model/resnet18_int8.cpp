@@ -1,7 +1,7 @@
 /* COPYRIGHT HEADER GOES HERE: No CopyRight Header String Passed During Model Conversion */
 
 /* Command Line used:
-qnn-onnx-converter act_bitwidth=8 act_bw=8 act_quantizer=tf adjust_nms_features_dims=True algorithms=[] align_matmul_ranks=True arch_checker=False batch=32 bias_bitwidth=8 bias_bw=8 converter_op_package_lib= copyright_file=None custom_io= custom_op_config_paths=None debug=None define_symbol=None disable_batchnorm_folding=False disable_node_validation=False disable_qnn_op_config_validation=False disable_relu_squashing=False dry_run=None dumpIR=False dump_custom_io_config_template= dump_inferred_model=False dump_value_info=False enable_match_gathernd=False exclude_named_tensors=False expand_gru_op_structure=True expand_lstm_op_structure=False extract_color_transform=True float_bias_bitwidth=0 float_bias_bw=32 float_bitwidth=32 float_bw=32 float_fallback=False force_prune_cast_ops=False handle_gather_negative_indices=True ignore_encodings=False inject_cast_for_gather=True input_dim=None input_dtype=[] input_encoding=[['input_data', 'other', 'bgr']] input_layout=[] input_list=target_raw_list_host.txt input_type=[] keep_disconnected_nodes=False keep_int64_inputs=False keep_quant_nodes=False match_caffe_ssd_to_tf=True no_simplification=False op_package_lib= out_names=['class_probs'] overwrite_model_prefix=False pack_4_bit_weights=False package_name=None param_quantizer=None perform_axes_to_spatial_first_order=True prepare_inputs_as_params=False preprocess_roi_pool_inputs=True preserve_io=[] quantization_overrides=aimet_export/resnet18/resnet18.encodings restrict_quantization_steps=[] squash_box_decoder=True unroll_gru_time_steps=True unroll_lstm_time_steps=True use_convert_quantization_nodes=False use_dynamic_16_bit_weights=False use_native_dtype=False use_native_input_files=False use_native_output_files=False use_per_channel_quantization=False use_per_row_quantization=False weight_bw=8 weights_bitwidth=8
+qnn-onnx-converter act_bitwidth=8 act_bw=8 act_quantizer=tf adjust_nms_features_dims=True algorithms=[] align_matmul_ranks=True arch_checker=False batch=32 bias_bitwidth=8 bias_bw=8 converter_op_package_lib= copyright_file=None custom_io= custom_op_config_paths=None debug=None define_symbol=None disable_batchnorm_folding=False disable_node_validation=False disable_qnn_op_config_validation=False disable_relu_squashing=False dry_run=None dumpIR=False dump_custom_io_config_template= dump_inferred_model=False dump_value_info=False enable_match_gathernd=False exclude_named_tensors=False expand_gru_op_structure=True expand_lstm_op_structure=False extract_color_transform=True float_bias_bitwidth=0 float_bias_bw=32 float_bitwidth=32 float_bw=32 float_fallback=False force_prune_cast_ops=False handle_gather_negative_indices=True ignore_encodings=False inject_cast_for_gather=True input_dim=None input_dtype=[] input_encoding=[['input', 'other', 'bgr']] input_layout=[] input_list=None input_type=[] keep_disconnected_nodes=False keep_int64_inputs=False keep_quant_nodes=False match_caffe_ssd_to_tf=True no_simplification=False op_package_lib= out_names=['class_probs'] overwrite_model_prefix=False pack_4_bit_weights=False package_name=None param_quantizer=None perform_axes_to_spatial_first_order=True prepare_inputs_as_params=False preprocess_roi_pool_inputs=True preserve_io=[] quantization_overrides= restrict_quantization_steps=[] squash_box_decoder=True unroll_gru_time_steps=True unroll_lstm_time_steps=True use_convert_quantization_nodes=False use_dynamic_16_bit_weights=False use_native_dtype=False use_native_input_files=False use_native_output_files=False use_per_channel_quantization=False use_per_row_quantization=False weight_bw=8 weights_bitwidth=8
 */
 
 #include "QnnOpDef.h"
@@ -40,10 +40,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "input_data",
                                          .type= QNN_TENSOR_TYPE_APP_WRITE,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0186584480106831f, .offset= -114}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_input_data,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -59,10 +59,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "conv1_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0080037266016006f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_conv1_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -78,10 +78,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "conv1_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0052292402833700f, .offset= -122}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_conv1_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -160,21 +160,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "conv1_weight",
     "conv1_bias"
   };
-  uint32_t dimensions__130[] = {32, 112, 112, 64};
+  uint32_t dimensions__127[] = {32, 112, 112, 64};
   Qnn_Tensor_t outputs_conv1[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_130",
+            .name= "_127",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0243841763585806f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__130,
+            .dimensions=dimensions__127,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -188,6 +188,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  inputs_conv1, // Input Tensor Names
                                  3, // Num Input Tensor Names
                                  outputs_conv1, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
+
+  /* ADDING NODE FOR relu */
+  const char*  inputs_relu[] = {
+    "_127"
+  };
+  uint32_t dimensions__130[] = {32, 112, 112, 64};
+  Qnn_Tensor_t outputs_relu[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_130",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__130,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "relu", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_relu, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_relu, // Output Tensors 
                                  1// Num Output Tensors 
   ), err);
 
@@ -267,10 +303,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
             .name= "_133",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0243841763585806f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
             .dimensions=dimensions__133,
             .memType= QNN_TENSORMEMTYPE_RAW,
@@ -298,10 +334,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer1_0_conv1_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0062937638722360f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer1_0_conv1_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -317,10 +353,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer1_0_conv1_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0075366655364633f, .offset= -109}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer1_0_conv1_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -399,21 +435,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "layer1_0_conv1_weight",
     "layer1_0_conv1_bias"
   };
-  uint32_t dimensions__142[] = {32, 56, 56, 64};
+  uint32_t dimensions__139[] = {32, 56, 56, 64};
   Qnn_Tensor_t outputs_layer1_0_conv1[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_142",
+            .name= "_139",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0187284220010042f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__142,
+            .dimensions=dimensions__139,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -430,6 +466,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  1// Num Output Tensors 
   ), err);
 
+
+  /* ADDING NODE FOR layer1_0_relu */
+  const char*  inputs_layer1_0_relu[] = {
+    "_139"
+  };
+  uint32_t dimensions__142[] = {32, 56, 56, 64};
+  Qnn_Tensor_t outputs_layer1_0_relu[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_142",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__142,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "layer1_0_relu", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_layer1_0_relu, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_layer1_0_relu, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
   uint32_t dimensions_layer1_0_conv2_weight[] = {3, 3, 64, 64};
   VALIDATE(resnet18_int8.addTensor("layer1_0_conv2_weight", // Node Name
                                    (Qnn_Tensor_t) {
@@ -439,10 +511,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer1_0_conv2_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0038418418262154f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer1_0_conv2_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -458,10 +530,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer1_0_conv2_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0119079751893878f, .offset= -105}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer1_0_conv2_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -549,10 +621,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
             .name= "_148",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0496850386261940f, .offset= -133}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
             .dimensions=dimensions__148,
             .memType= QNN_TENSORMEMTYPE_RAW,
@@ -577,21 +649,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "_148",
     "_133"
   };
-  uint32_t dimensions__155[] = {32, 56, 56, 64};
+  uint32_t dimensions__152[] = {32, 56, 56, 64};
   Qnn_Tensor_t outputs_module_add[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_155",
+            .name= "_152",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0267292615026236f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__155,
+            .dimensions=dimensions__152,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -608,6 +680,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  1// Num Output Tensors 
   ), err);
 
+
+  /* ADDING NODE FOR module_layer1_0_relu_1 */
+  const char*  inputs_module_layer1_0_relu_1[] = {
+    "_152"
+  };
+  uint32_t dimensions__155[] = {32, 56, 56, 64};
+  Qnn_Tensor_t outputs_module_layer1_0_relu_1[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_155",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__155,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "module_layer1_0_relu_1", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_module_layer1_0_relu_1, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_module_layer1_0_relu_1, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
   uint32_t dimensions_layer1_1_conv1_weight[] = {3, 3, 64, 64};
   VALIDATE(resnet18_int8.addTensor("layer1_1_conv1_weight", // Node Name
                                    (Qnn_Tensor_t) {
@@ -617,10 +725,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer1_1_conv1_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0051111695356667f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer1_1_conv1_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -636,10 +744,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer1_1_conv1_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0087309069931507f, .offset= -117}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer1_1_conv1_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -718,21 +826,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "layer1_1_conv1_weight",
     "layer1_1_conv1_bias"
   };
-  uint32_t dimensions__164[] = {32, 56, 56, 64};
+  uint32_t dimensions__161[] = {32, 56, 56, 64};
   Qnn_Tensor_t outputs_layer1_1_conv1[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_164",
+            .name= "_161",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0164157822728157f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__164,
+            .dimensions=dimensions__161,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -749,6 +857,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  1// Num Output Tensors 
   ), err);
 
+
+  /* ADDING NODE FOR layer1_1_relu */
+  const char*  inputs_layer1_1_relu[] = {
+    "_161"
+  };
+  uint32_t dimensions__164[] = {32, 56, 56, 64};
+  Qnn_Tensor_t outputs_layer1_1_relu[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_164",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__164,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "layer1_1_relu", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_layer1_1_relu, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_layer1_1_relu, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
   uint32_t dimensions_layer1_1_conv2_weight[] = {3, 3, 64, 64};
   VALIDATE(resnet18_int8.addTensor("layer1_1_conv2_weight", // Node Name
                                    (Qnn_Tensor_t) {
@@ -758,10 +902,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer1_1_conv2_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0029969410970807f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer1_1_conv2_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -777,10 +921,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer1_1_conv2_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0088430047035217f, .offset= -132}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer1_1_conv2_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -868,10 +1012,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
             .name= "_170",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0739980340003967f, .offset= -164}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
             .dimensions=dimensions__170,
             .memType= QNN_TENSORMEMTYPE_RAW,
@@ -896,21 +1040,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "_170",
     "_155"
   };
-  uint32_t dimensions__177[] = {32, 56, 56, 64};
+  uint32_t dimensions__174[] = {32, 56, 56, 64};
   Qnn_Tensor_t outputs_module_add_1[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_177",
+            .name= "_174",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0338630899786949f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__177,
+            .dimensions=dimensions__174,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -927,6 +1071,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  1// Num Output Tensors 
   ), err);
 
+
+  /* ADDING NODE FOR module_layer1_1_relu_1 */
+  const char*  inputs_module_layer1_1_relu_1[] = {
+    "_174"
+  };
+  uint32_t dimensions__177[] = {32, 56, 56, 64};
+  Qnn_Tensor_t outputs_module_layer1_1_relu_1[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_177",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__177,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "module_layer1_1_relu_1", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_module_layer1_1_relu_1, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_module_layer1_1_relu_1, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
   uint32_t dimensions_layer2_0_conv1_weight[] = {3, 3, 64, 128};
   VALIDATE(resnet18_int8.addTensor("layer2_0_conv1_weight", // Node Name
                                    (Qnn_Tensor_t) {
@@ -936,10 +1116,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer2_0_conv1_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0026814034208655f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer2_0_conv1_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -955,10 +1135,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer2_0_conv1_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0046267709694803f, .offset= -95}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer2_0_conv1_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1037,21 +1217,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "layer2_0_conv1_weight",
     "layer2_0_conv1_bias"
   };
-  uint32_t dimensions__186[] = {32, 28, 28, 128};
+  uint32_t dimensions__183[] = {32, 28, 28, 128};
   Qnn_Tensor_t outputs_layer2_0_conv1[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_186",
+            .name= "_183",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0149837862700224f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__186,
+            .dimensions=dimensions__183,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -1068,6 +1248,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  1// Num Output Tensors 
   ), err);
 
+
+  /* ADDING NODE FOR layer2_0_relu */
+  const char*  inputs_layer2_0_relu[] = {
+    "_183"
+  };
+  uint32_t dimensions__186[] = {32, 28, 28, 128};
+  Qnn_Tensor_t outputs_layer2_0_relu[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_186",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__186,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "layer2_0_relu", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_layer2_0_relu, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_layer2_0_relu, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
   uint32_t dimensions_layer2_0_conv2_weight[] = {3, 3, 128, 128};
   VALIDATE(resnet18_int8.addTensor("layer2_0_conv2_weight", // Node Name
                                    (Qnn_Tensor_t) {
@@ -1077,10 +1293,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer2_0_conv2_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0033634640276432f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer2_0_conv2_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1096,10 +1312,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer2_0_conv2_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0085827028378844f, .offset= -86}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer2_0_conv2_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1187,10 +1403,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
             .name= "_192",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0431009232997894f, .offset= -102}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
             .dimensions=dimensions__192,
             .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1218,10 +1434,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer2_0_downsample_0_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0061435215175152f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer2_0_downsample_0_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1237,10 +1453,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer2_0_downsample_0_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0081412447616458f, .offset= -136}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer2_0_downsample_0_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1328,10 +1544,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
             .name= "_198",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0377241298556328f, .offset= -141}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
             .dimensions=dimensions__198,
             .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1356,21 +1572,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "_192",
     "_198"
   };
-  uint32_t dimensions__205[] = {32, 28, 28, 128};
+  uint32_t dimensions__202[] = {32, 28, 28, 128};
   Qnn_Tensor_t outputs_module_add_2[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_205",
+            .name= "_202",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0291704013943672f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__205,
+            .dimensions=dimensions__202,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -1387,6 +1603,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  1// Num Output Tensors 
   ), err);
 
+
+  /* ADDING NODE FOR module_layer2_0_relu_1 */
+  const char*  inputs_module_layer2_0_relu_1[] = {
+    "_202"
+  };
+  uint32_t dimensions__205[] = {32, 28, 28, 128};
+  Qnn_Tensor_t outputs_module_layer2_0_relu_1[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_205",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__205,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "module_layer2_0_relu_1", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_module_layer2_0_relu_1, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_module_layer2_0_relu_1, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
   uint32_t dimensions_layer2_1_conv1_weight[] = {3, 3, 128, 128};
   VALIDATE(resnet18_int8.addTensor("layer2_1_conv1_weight", // Node Name
                                    (Qnn_Tensor_t) {
@@ -1396,10 +1648,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer2_1_conv1_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0034547105897218f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer2_1_conv1_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1415,10 +1667,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer2_1_conv1_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0056576351635158f, .offset= -146}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer2_1_conv1_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1497,21 +1749,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "layer2_1_conv1_weight",
     "layer2_1_conv1_bias"
   };
-  uint32_t dimensions__214[] = {32, 28, 28, 128};
+  uint32_t dimensions__211[] = {32, 28, 28, 128};
   Qnn_Tensor_t outputs_layer2_1_conv1[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_214",
+            .name= "_211",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0194325111806393f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__214,
+            .dimensions=dimensions__211,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -1528,6 +1780,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  1// Num Output Tensors 
   ), err);
 
+
+  /* ADDING NODE FOR layer2_1_relu */
+  const char*  inputs_layer2_1_relu[] = {
+    "_211"
+  };
+  uint32_t dimensions__214[] = {32, 28, 28, 128};
+  Qnn_Tensor_t outputs_layer2_1_relu[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_214",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__214,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "layer2_1_relu", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_layer2_1_relu, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_layer2_1_relu, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
   uint32_t dimensions_layer2_1_conv2_weight[] = {3, 3, 128, 128};
   VALIDATE(resnet18_int8.addTensor("layer2_1_conv2_weight", // Node Name
                                    (Qnn_Tensor_t) {
@@ -1537,10 +1825,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer2_1_conv2_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0028004534542561f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer2_1_conv2_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1556,10 +1844,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer2_1_conv2_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0090296454727650f, .offset= -127}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer2_1_conv2_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1647,10 +1935,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
             .name= "_220",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0494959391653538f, .offset= -157}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
             .dimensions=dimensions__220,
             .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1675,21 +1963,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "_220",
     "_205"
   };
-  uint32_t dimensions__227[] = {32, 28, 28, 128};
+  uint32_t dimensions__224[] = {32, 28, 28, 128};
   Qnn_Tensor_t outputs_module_add_3[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_227",
+            .name= "_224",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0291318222880363f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__227,
+            .dimensions=dimensions__224,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -1706,6 +1994,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  1// Num Output Tensors 
   ), err);
 
+
+  /* ADDING NODE FOR module_layer2_1_relu_1 */
+  const char*  inputs_module_layer2_1_relu_1[] = {
+    "_224"
+  };
+  uint32_t dimensions__227[] = {32, 28, 28, 128};
+  Qnn_Tensor_t outputs_module_layer2_1_relu_1[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_227",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__227,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "module_layer2_1_relu_1", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_module_layer2_1_relu_1, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_module_layer2_1_relu_1, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
   uint32_t dimensions_layer3_0_conv1_weight[] = {3, 3, 128, 256};
   VALIDATE(resnet18_int8.addTensor("layer3_0_conv1_weight", // Node Name
                                    (Qnn_Tensor_t) {
@@ -1715,10 +2039,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer3_0_conv1_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0030862218700349f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer3_0_conv1_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1734,10 +2058,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer3_0_conv1_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0060660871677101f, .offset= -113}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer3_0_conv1_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1816,21 +2140,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "layer3_0_conv1_weight",
     "layer3_0_conv1_bias"
   };
-  uint32_t dimensions__236[] = {32, 14, 14, 256};
+  uint32_t dimensions__233[] = {32, 14, 14, 256};
   Qnn_Tensor_t outputs_layer3_0_conv1[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_236",
+            .name= "_233",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0167406518012285f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__236,
+            .dimensions=dimensions__233,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -1847,6 +2171,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  1// Num Output Tensors 
   ), err);
 
+
+  /* ADDING NODE FOR layer3_0_relu */
+  const char*  inputs_layer3_0_relu[] = {
+    "_233"
+  };
+  uint32_t dimensions__236[] = {32, 14, 14, 256};
+  Qnn_Tensor_t outputs_layer3_0_relu[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_236",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__236,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "layer3_0_relu", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_layer3_0_relu, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_layer3_0_relu, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
   uint32_t dimensions_layer3_0_conv2_weight[] = {3, 3, 256, 256};
   VALIDATE(resnet18_int8.addTensor("layer3_0_conv2_weight", // Node Name
                                    (Qnn_Tensor_t) {
@@ -1856,10 +2216,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer3_0_conv2_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0026260958984494f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer3_0_conv2_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1875,10 +2235,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer3_0_conv2_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0038371533155441f, .offset= -96}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer3_0_conv2_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1966,10 +2326,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
             .name= "_242",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0378371514379978f, .offset= -92}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
             .dimensions=dimensions__242,
             .memType= QNN_TENSORMEMTYPE_RAW,
@@ -1997,10 +2357,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer3_0_downsample_0_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0021074807737023f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer3_0_downsample_0_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2016,10 +2376,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer3_0_downsample_0_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0022548795677722f, .offset= -149}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer3_0_downsample_0_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2107,10 +2467,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
             .name= "_248",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0169508196413517f, .offset= -156}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
             .dimensions=dimensions__248,
             .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2135,21 +2495,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "_242",
     "_248"
   };
-  uint32_t dimensions__255[] = {32, 14, 14, 256};
+  uint32_t dimensions__252[] = {32, 14, 14, 256};
   Qnn_Tensor_t outputs_module_add_4[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_255",
+            .name= "_252",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0246487576514482f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__255,
+            .dimensions=dimensions__252,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -2166,6 +2526,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  1// Num Output Tensors 
   ), err);
 
+
+  /* ADDING NODE FOR module_layer3_0_relu_1 */
+  const char*  inputs_module_layer3_0_relu_1[] = {
+    "_252"
+  };
+  uint32_t dimensions__255[] = {32, 14, 14, 256};
+  Qnn_Tensor_t outputs_module_layer3_0_relu_1[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_255",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__255,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "module_layer3_0_relu_1", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_module_layer3_0_relu_1, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_module_layer3_0_relu_1, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
   uint32_t dimensions_layer3_1_conv1_weight[] = {3, 3, 256, 256};
   VALIDATE(resnet18_int8.addTensor("layer3_1_conv1_weight", // Node Name
                                    (Qnn_Tensor_t) {
@@ -2175,10 +2571,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer3_1_conv1_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0023310356773436f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer3_1_conv1_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2194,10 +2590,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer3_1_conv1_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0060801822692156f, .offset= -133}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer3_1_conv1_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2276,21 +2672,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "layer3_1_conv1_weight",
     "layer3_1_conv1_bias"
   };
-  uint32_t dimensions__264[] = {32, 14, 14, 256};
+  uint32_t dimensions__261[] = {32, 14, 14, 256};
   Qnn_Tensor_t outputs_layer3_1_conv1[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_264",
+            .name= "_261",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0195951256901026f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__264,
+            .dimensions=dimensions__261,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -2307,6 +2703,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  1// Num Output Tensors 
   ), err);
 
+
+  /* ADDING NODE FOR layer3_1_relu */
+  const char*  inputs_layer3_1_relu[] = {
+    "_261"
+  };
+  uint32_t dimensions__264[] = {32, 14, 14, 256};
+  Qnn_Tensor_t outputs_layer3_1_relu[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_264",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__264,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "layer3_1_relu", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_layer3_1_relu, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_layer3_1_relu, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
   uint32_t dimensions_layer3_1_conv2_weight[] = {3, 3, 256, 256};
   VALIDATE(resnet18_int8.addTensor("layer3_1_conv2_weight", // Node Name
                                    (Qnn_Tensor_t) {
@@ -2316,10 +2748,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer3_1_conv2_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0025948574766517f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer3_1_conv2_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2335,10 +2767,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer3_1_conv2_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0081342179328203f, .offset= -125}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer3_1_conv2_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2426,10 +2858,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
             .name= "_270",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0494119115173817f, .offset= -159}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
             .dimensions=dimensions__270,
             .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2454,21 +2886,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "_270",
     "_255"
   };
-  uint32_t dimensions__277[] = {32, 14, 14, 256};
+  uint32_t dimensions__274[] = {32, 14, 14, 256};
   Qnn_Tensor_t outputs_module_add_5[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_277",
+            .name= "_274",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0356519520282745f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__277,
+            .dimensions=dimensions__274,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -2485,6 +2917,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  1// Num Output Tensors 
   ), err);
 
+
+  /* ADDING NODE FOR module_layer3_1_relu_1 */
+  const char*  inputs_module_layer3_1_relu_1[] = {
+    "_274"
+  };
+  uint32_t dimensions__277[] = {32, 14, 14, 256};
+  Qnn_Tensor_t outputs_module_layer3_1_relu_1[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_277",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__277,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "module_layer3_1_relu_1", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_module_layer3_1_relu_1, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_module_layer3_1_relu_1, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
   uint32_t dimensions_layer4_0_conv1_weight[] = {3, 3, 256, 512};
   VALIDATE(resnet18_int8.addTensor("layer4_0_conv1_weight", // Node Name
                                    (Qnn_Tensor_t) {
@@ -2494,10 +2962,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer4_0_conv1_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0030127656646073f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer4_0_conv1_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2513,10 +2981,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer4_0_conv1_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0040908488444984f, .offset= -117}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer4_0_conv1_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2595,21 +3063,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "layer4_0_conv1_weight",
     "layer4_0_conv1_bias"
   };
-  uint32_t dimensions__286[] = {32, 7, 7, 512};
+  uint32_t dimensions__283[] = {32, 7, 7, 512};
   Qnn_Tensor_t outputs_layer4_0_conv1[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_286",
+            .name= "_283",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0114180631935596f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__286,
+            .dimensions=dimensions__283,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -2626,6 +3094,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  1// Num Output Tensors 
   ), err);
 
+
+  /* ADDING NODE FOR layer4_0_relu */
+  const char*  inputs_layer4_0_relu[] = {
+    "_283"
+  };
+  uint32_t dimensions__286[] = {32, 7, 7, 512};
+  Qnn_Tensor_t outputs_layer4_0_relu[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_286",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__286,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "layer4_0_relu", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_layer4_0_relu, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_layer4_0_relu, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
   uint32_t dimensions_layer4_0_conv2_weight[] = {3, 3, 512, 512};
   VALIDATE(resnet18_int8.addTensor("layer4_0_conv2_weight", // Node Name
                                    (Qnn_Tensor_t) {
@@ -2635,10 +3139,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer4_0_conv2_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0027458304539323f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer4_0_conv2_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2654,10 +3158,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer4_0_conv2_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0073393476195633f, .offset= -153}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer4_0_conv2_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2745,10 +3249,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
             .name= "_292",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0451336354017258f, .offset= -115}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
             .dimensions=dimensions__292,
             .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2776,10 +3280,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer4_0_downsample_0_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0058832294307649f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer4_0_downsample_0_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2795,10 +3299,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer4_0_downsample_0_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0040180380456150f, .offset= -189}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer4_0_downsample_0_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2886,10 +3390,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
             .name= "_298",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0278407987207174f, .offset= -123}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
             .dimensions=dimensions__298,
             .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2914,21 +3418,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "_292",
     "_298"
   };
-  uint32_t dimensions__305[] = {32, 7, 7, 512};
+  uint32_t dimensions__302[] = {32, 7, 7, 512};
   Qnn_Tensor_t outputs_module_add_6[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_305",
+            .name= "_302",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0335652530193329f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__305,
+            .dimensions=dimensions__302,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -2945,6 +3449,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  1// Num Output Tensors 
   ), err);
 
+
+  /* ADDING NODE FOR module_layer4_0_relu_1 */
+  const char*  inputs_module_layer4_0_relu_1[] = {
+    "_302"
+  };
+  uint32_t dimensions__305[] = {32, 7, 7, 512};
+  Qnn_Tensor_t outputs_module_layer4_0_relu_1[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_305",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__305,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "module_layer4_0_relu_1", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_module_layer4_0_relu_1, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_module_layer4_0_relu_1, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
   uint32_t dimensions_layer4_1_conv1_weight[] = {3, 3, 512, 512};
   VALIDATE(resnet18_int8.addTensor("layer4_1_conv1_weight", // Node Name
                                    (Qnn_Tensor_t) {
@@ -2954,10 +3494,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer4_1_conv1_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0020930483005941f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer4_1_conv1_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -2973,10 +3513,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer4_1_conv1_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0053378175944090f, .offset= -159}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer4_1_conv1_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -3055,21 +3595,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "layer4_1_conv1_weight",
     "layer4_1_conv1_bias"
   };
-  uint32_t dimensions__314[] = {32, 7, 7, 512};
+  uint32_t dimensions__311[] = {32, 7, 7, 512};
   Qnn_Tensor_t outputs_layer4_1_conv1[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_314",
+            .name= "_311",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0180877987295389f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__314,
+            .dimensions=dimensions__311,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -3086,6 +3626,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  1// Num Output Tensors 
   ), err);
 
+
+  /* ADDING NODE FOR layer4_1_relu */
+  const char*  inputs_layer4_1_relu[] = {
+    "_311"
+  };
+  uint32_t dimensions__314[] = {32, 7, 7, 512};
+  Qnn_Tensor_t outputs_layer4_1_relu[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_314",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__314,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "layer4_1_relu", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_layer4_1_relu, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_layer4_1_relu, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
   uint32_t dimensions_layer4_1_conv2_weight[] = {3, 3, 512, 512};
   VALIDATE(resnet18_int8.addTensor("layer4_1_conv2_weight", // Node Name
                                    (Qnn_Tensor_t) {
@@ -3095,10 +3671,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer4_1_conv2_weight",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0021399301476777f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 4,
                                          .dimensions=dimensions_layer4_1_conv2_weight,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -3114,10 +3690,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "layer4_1_conv2_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0114674223586917f, .offset= -61}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_layer4_1_conv2_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -3205,10 +3781,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
             .name= "_320",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.2487706243991852f, .offset= -60}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
             .dimensions=dimensions__320,
             .memType= QNN_TENSORMEMTYPE_RAW,
@@ -3233,21 +3809,21 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
     "_320",
     "_305"
   };
-  uint32_t dimensions__327[] = {32, 7, 7, 512};
+  uint32_t dimensions__324[] = {32, 7, 7, 512};
   Qnn_Tensor_t outputs_module_add_7[] = {
     (Qnn_Tensor_t) {
           .version= QNN_TENSOR_VERSION_1,
           {.v1= {
             .id=0,
-            .name= "_327",
+            .name= "_324",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.2111094444990158f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
-            .dimensions=dimensions__327,
+            .dimensions=dimensions__324,
             .memType= QNN_TENSORMEMTYPE_RAW,
             {.clientBuf= { .data=nullptr,
                            .dataSize=0}}}}}
@@ -3261,6 +3837,42 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                  inputs_module_add_7, // Input Tensor Names
                                  2, // Num Input Tensor Names
                                  outputs_module_add_7, // Output Tensors 
+                                 1// Num Output Tensors 
+  ), err);
+
+
+  /* ADDING NODE FOR module_layer4_1_relu_1 */
+  const char*  inputs_module_layer4_1_relu_1[] = {
+    "_324"
+  };
+  uint32_t dimensions__327[] = {32, 7, 7, 512};
+  Qnn_Tensor_t outputs_module_layer4_1_relu_1[] = {
+    (Qnn_Tensor_t) {
+          .version= QNN_TENSOR_VERSION_1,
+          {.v1= {
+            .id=0,
+            .name= "_327",
+            .type= QNN_TENSOR_TYPE_NATIVE,
+            .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
+            .rank= 4,
+            .dimensions=dimensions__327,
+            .memType= QNN_TENSORMEMTYPE_RAW,
+            {.clientBuf= { .data=nullptr,
+                           .dataSize=0}}}}}
+  };
+  VALIDATE(resnet18_int8.addNode(QNN_OPCONFIG_VERSION_1, // Op_Config_t Version
+                                 "module_layer4_1_relu_1", // Node Name
+                                 "qti.aisw", // Package Name
+                                 "Relu", // Qnn Node Type
+                                 nullptr, // Node Params
+                                 0, // Num Node Params
+                                 inputs_module_layer4_1_relu_1, // Input Tensor Names
+                                 1, // Num Input Tensor Names
+                                 outputs_module_layer4_1_relu_1, // Output Tensors 
                                  1// Num Output Tensors 
   ), err);
 
@@ -3343,10 +3955,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
             .name= "_330",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0705818310379982f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
             .dimensions=dimensions__330,
             .memType= QNN_TENSORMEMTYPE_RAW,
@@ -3401,10 +4013,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
             .name= "_330_nchw",
             .type= QNN_TENSOR_TYPE_NATIVE,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.0705818310379982f, .offset= 0}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 4,
             .dimensions=dimensions__330_nchw,
             .memType= QNN_TENSORMEMTYPE_RAW,
@@ -3432,10 +4044,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "fc_weight_permute",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0056317872367799f, .offset= -128}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 2,
                                          .dimensions=dimensions_fc_weight_permute,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -3451,10 +4063,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
                                          .name= "fc_bias",
                                          .type= QNN_TENSOR_TYPE_STATIC,
                                          .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-                                         .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-                                         .quantizeParams= { QNN_DEFINITION_DEFINED,
-                                                            QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                                                            {.scaleOffsetEncoding= {.scale= 0.0004361698229332f, .offset= -114}}},
+                                         .dataType= QNN_DATATYPE_FLOAT_32,
+                                         .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                                                            QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                                                            {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
                                          .rank= 1,
                                          .dimensions=dimensions_fc_bias,
                                          .memType= QNN_TENSORMEMTYPE_RAW,
@@ -3477,10 +4089,10 @@ ModelError_t QnnModel_composeGraphs(Qnn_BackendHandle_t backendHandle,
             .name= "class_probs",
             .type= QNN_TENSOR_TYPE_APP_READ,
             .dataFormat= QNN_TENSOR_DATA_FORMAT_FLAT_BUFFER,
-            .dataType= QNN_DATATYPE_UFIXED_POINT_8,
-            .quantizeParams= { QNN_DEFINITION_DEFINED,
-                               QNN_QUANTIZATION_ENCODING_SCALE_OFFSET,
-                               {.scaleOffsetEncoding= {.scale= 0.1869061440229416f, .offset= -63}}},
+            .dataType= QNN_DATATYPE_FLOAT_32,
+            .quantizeParams= { QNN_DEFINITION_UNDEFINED,
+                               QNN_QUANTIZATION_ENCODING_UNDEFINED,
+                               {.scaleOffsetEncoding= {.scale= 0.0000000000000000f, .offset= 0}}},
             .rank= 2,
             .dimensions=dimensions_class_probs,
             .memType= QNN_TENSORMEMTYPE_RAW,

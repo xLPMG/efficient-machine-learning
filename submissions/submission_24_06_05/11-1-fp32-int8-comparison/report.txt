@@ -1,0 +1,51 @@
+(ai_direct) eml_17@LeChuck:~/efficient-machine-learning/submissions/submission_24_06_05/11-1-fp32-int8-comparison$ python interpret_int8_data.py 
+=====================================
+Result  0
+FP32  | CPU   | HOST  | GPU   | HTP
+56.25%| 56.25%| 56.25%| 56.25%| 43.75%
+=====================================
+Result  1
+FP32  | CPU   | HOST  | GPU   | HTP
+71.88%| 71.88%| 71.88%| 71.88%| 71.88%
+=====================================
+Result  2
+FP32  | CPU   | HOST  | GPU   | HTP
+53.12%| 53.12%| 53.12%| 53.12%| 56.25%
+=====================================
+Result  3
+FP32  | CPU   | HOST  | GPU   | HTP
+71.88%| 71.88%| 71.88%| 71.88%| 75.00%
+=====================================
+Result  4
+FP32  | CPU   | HOST  | GPU   | HTP
+65.62%| 65.62%| 65.62%| 65.62%| 59.38%
+=====================================
+Result  5
+FP32  | CPU   | HOST  | GPU   | HTP
+71.88%| 71.88%| 71.88%| 71.88%| 62.50%
+=====================================
+Result  6
+FP32  | CPU   | HOST  | GPU   | HTP
+71.88%| 71.88%| 71.88%| 71.88%| 68.75%
+=====================================
+Result  7
+FP32  | CPU   | HOST  | GPU   | HTP
+65.62%| 65.62%| 65.62%| 65.62%| 62.50%
+=====================================
+Result  8
+FP32  | CPU   | HOST  | GPU   | HTP
+65.62%| 65.62%| 65.62%| 65.62%| 62.50%
+=====================================
+Result  9
+FP32  | CPU   | HOST  | GPU   | HTP
+71.88%| 71.88%| 71.88%| 71.88%| 81.25%
+
+I executed the Kryo, Host and GPU scripts again but replaced "fp32" everywhere with "int8",
+so that they would use the int8 model and libraries which were created using the HTP script.
+
+For some reason (that I do not know), it produced the same results as the FP32 model.
+On the HTP device however, different results can be seen.
+
+It is interesting to see that in batch 2, 3, and 9 INT8 had a higher accuracy.
+I wont calculate the exact average deviation but it seems like on average we did loose accuracy 
+by quantizing, however not by much. E.g. 65.625% vs 62.5% seems totally acceptable.
