@@ -1,0 +1,17 @@
+BATCH ACCURACY_FP32 ACCURACY_INT8
+0     56.25%        43.75%
+1     71.875%       71.875%
+2     53.125%       56.25%
+3     71.875%       75.0%
+4     65.625%       59.375%
+5     71.875%       62.5%
+6     71.875%       68.75%
+7     65.625%       62.5%
+8     65.625%       62.5%
+9     71.875%       81.25%
+(FP32: Host CPU, Kryo, Adreno; INT8: HTP)
+
+It is interesting to see that in batch 2, 3, and 9 INT8 had a higher accuracy.
+I wont calculate the exact average deviation but it seems like on average
+we did loose accuracy by quantizing, however not by much.
+Eg 65.625% vs 62.5% seems totally acceptable.

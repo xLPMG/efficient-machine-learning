@@ -1,6 +1,5 @@
 # set serial of android device
 export ANDROID_SERIAL=646f926
-
 # set user directory on the device
 export DEVICE_USER_DIR=/data/local/tmp/eml_17
 

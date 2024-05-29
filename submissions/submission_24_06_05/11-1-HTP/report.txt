@@ -1,0 +1,46 @@
+The console output was too long and fast that I could not copy and paste it here.
+However, the end of the console output:
+
+/opt/qcom/aistack/qnn/2.18.0.240101/bin/aarch64-android/qnn-net-run: 1 file pushed, 0 skipped. 47.4 MB/s (1402672 bytes in 0.028s)
+/opt/qcom/aistack/qnn/2.18.0.240101/lib/aarch64-android/libQnnHtp.so: 1 file pushed, 0 skipped. 65.2 MB/s (1540440 bytes in 0.023s)
+/opt/qcom/aistack/qnn/2.18.0.240101/lib/hexagon-v73/unsigned/libQnnHtpV73Skel.so: 1 file pushed, 0 skipped. 121.6 MB/s (7230312 bytes in 0.057s)
+/opt/qcom/aistack/qnn/2.18.0.240101/lib/aarch64-android/libQnnHtpV73Stub.so: 1 file pushed, 0 skipped. 38.1 MB/s (290424 bytes in 0.007s)
+model/resnet18_int8.serialized.bin: 1 file pushed, 0 skipped. 157.4 MB/s (12753096 bytes in 0.077s)
+qnn-net-run pid:30597
+WARNING: linker: Warning: unable to normalize "$/data/local/tmp/eml_17/resnet18_htp_int8" (ignoring)
+WARNING: linker: Warning: unable to normalize "$/data/local/tmp/eml_17/resnet18_htp_int8" (ignoring)
+/data/local/tmp/eml_17/resnet18_htp_int8/output/: 60 files pulled, 0 skipped. 14.8 MB/s (7680000 bytes in 0.495s)
+
+Accuracy measurment:
+
+(ai_direct) eml_17@LeChuck:~/efficient-machine-learning/submissions/submission_24_06_05/11-1-HTP$ python interpret_data.py 
+==============================
+Result  0
+Accuracy:  43.75 %
+==============================
+Result  1
+Accuracy:  71.875 %
+==============================
+Result  2
+Accuracy:  56.25 %
+==============================
+Result  3
+Accuracy:  75.0 %
+==============================
+Result  4
+Accuracy:  59.375 %
+==============================
+Result  5
+Accuracy:  62.5 %
+==============================
+Result  6
+Accuracy:  68.75 %
+==============================
+Result  7
+Accuracy:  62.5 %
+==============================
+Result  8
+Accuracy:  62.5 %
+==============================
+Result  9
+Accuracy:  81.25 %
