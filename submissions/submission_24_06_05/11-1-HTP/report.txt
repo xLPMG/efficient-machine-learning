@@ -1,5 +1,5 @@
 The console output was too long and fast that I could not copy and paste it here.
-However, the end of the console output:
+However I was able to copy the end of the console output:
 
 /opt/qcom/aistack/qnn/2.18.0.240101/bin/aarch64-android/qnn-net-run: 1 file pushed, 0 skipped. 47.4 MB/s (1402672 bytes in 0.028s)
 /opt/qcom/aistack/qnn/2.18.0.240101/lib/aarch64-android/libQnnHtp.so: 1 file pushed, 0 skipped. 65.2 MB/s (1540440 bytes in 0.023s)
