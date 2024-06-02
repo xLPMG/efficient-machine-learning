@@ -1,0 +1,1 @@
+cd /data/local/tmp/eml_17/qnnbm.repo/resnet18_fp32;/data/local/tmp/eml_17/qnnbm.repo/artifacts/aarch64-android/bin/qnn-profile-viewer --input_log output/qnn-profiling-data_0.log --output output/diaglog.csv > output/diaglog_out.txt;

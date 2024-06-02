@@ -1,4 +1,4 @@
-export ANDROID_NDK_ROOT <>
+export ANDROID_NDK_ROOT=/HexagonSDK/5.5.0.1/tools/android-ndk-r25c
 
 cd opt/qcom
 find | grep ndk
