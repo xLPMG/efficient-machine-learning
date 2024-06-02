@@ -49,3 +49,7 @@ On the HTP device however, different results can be seen.
 It is interesting to see that in batch 2, 3, and 9 INT8 had a higher accuracy.
 I wont calculate the exact average deviation but it seems like on average we did loose accuracy 
 by quantizing, however not by much. E.g. 65.625% vs 62.5% seems totally acceptable.
+
+One thing I want to add is that I had no trouble running the script on the GPU.
+Classmates told me about their errors and I even ran the script of another group
+myself and got no error. I tested this on device 646f926 and also on d4334008.

@@ -5,7 +5,7 @@ classProbsFile = "class_probs.raw"
 pathResult_CPUFP32 = "output/cpu_fp32/output/Result_"
 pathResult_CPUI8 = "output/cpu_int8/Result_"
 pathResult_HOSTI8 = "output/host_int8/Result_"
-pathResult_GPUI8 = "output/gpu_int8/output/Result_"
+pathResult_GPUI8 = "output/gpu_int8/Result_"
 pathResult_HTPI8 = "output/htp_int8/output/Result_"
 pathLabel = "/opt/data/imagenet/raw_test/batch_size_32/labels_"
 

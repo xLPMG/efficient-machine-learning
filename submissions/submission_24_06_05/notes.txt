@@ -1,0 +1,8 @@
+export ANDROID_NDK_ROOT <>
+
+cd opt/qcom
+find | grep ndk
+
+1. json: fp32 cpu & gpu
+2. json: int8 cpu
+3. json: int8 htp mit --htp_serialize
