@@ -3,7 +3,7 @@
   "HostRootPath": "resnet18_cpu_gpu_fp32.repo",
   "HostResultsDir":"resnet18_cpu_gpu_fp32.repo/results",
   "DevicePath":"/data/local/tmp/eml_17/qnnbm.repo",
-  "Devices":["2cb92c6a"],
+  "Devices":["646f926"],
   "Runs":10,
   "Model": {
     "Name": "resnet18_fp32",

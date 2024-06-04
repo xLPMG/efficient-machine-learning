@@ -1,0 +1,50 @@
+QNN SDK version:,2.18.0.240101
+
+Configuration used:
+Name,resnet18_int8
+HostRootPath,/home/eml_17/efficient-machine-learning/submissions/submission_24_06_05/11-2-benchmark/int8/resnet18_int8.repo
+HostResultsDir,/home/eml_17/efficient-machine-learning/submissions/submission_24_06_05/11-2-benchmark/int8/resnet18_int8.repo/results
+DevicePath,/data/local/tmp/eml_17/qnnbm.repo
+Devices,646f926
+HostName,localhost
+Graph Prepare,BACKEND PREPARE
+Runs,10
+Model:Name,resnet18_int8
+Model:qnn_model,/home/eml_17/efficient-machine-learning/submissions/submission_24_06_05/11-2-benchmark/int8/model_libs/aarch64-android/libresnet18_int8.so
+Model:InputList,target_raw_list.txt
+Model:Data,data
+Backends,CPU
+Architectures,aarch64
+Compiler,clang9.0
+C++ Standard Library,libc++_shared.so
+Measurements,timing
+PerfProfile,high_performance
+ProfilingLevel,basic
+SharedBuffer,No
+Date,2024-06-04 19:31:45.306781
+
+Device Info:
+ro.product.name,kalama
+ro.serialno,646f926
+ro.product.model,Kalama for arm64
+ro.product.board,kalama
+ro.product.brand,qti
+ro.product.device,kalama
+ro.product.manufacturer,QUALCOMM
+ro.product.cpu.abi,arm64-v8a
+ro.build.au_rev,unknown
+ro.build.description,kalama-userdebug 13 TKQ1.230127.002 eng.lnxbui.20230221.040141 test-keys
+ro.build.version.sdk,33
+Meta_Build_ID,unknown
+OS_Type,unknown
+
+,, ,CPU_timing(10 runs), , 
+,, ,avg (us),max (us),min (us),std_dev (us)
+,,Init Stats [NetRun],48166,61830,40664, 
+,,Finalize Stats [NetRun],12716,13719,11586, 
+,,Finalize Stats [Backend(GRAPH_FINALIZE)],12712,13714,11582, 
+,,De-Init Stats [NetRun],31146,44734,18855, 
+,,De-Init Stats [Backend(null)],1,2,0, 
+,,Total Inference Time [NetRun],1641974,1655920,1631198,9052.177395522029
+,,Total Inference Time [Backend(GRAPH_EXECUTE)],1639776,1653751,1628932,9057.991563623067
+
