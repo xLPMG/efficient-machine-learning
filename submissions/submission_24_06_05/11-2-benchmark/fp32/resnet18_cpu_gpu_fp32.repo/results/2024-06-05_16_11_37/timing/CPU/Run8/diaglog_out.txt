@@ -1,0 +1,139 @@
+Log File Created: Tue Mar  7 14:40:43 2023
+Time Scale: 1e-06
+Epoch Timestamp: 1678200043670867 Steady Clock Timestamp: 1219266198993
+Generated using: 
+qnn-profile-viewer v2.18.0.231229151826_79175
+qnn-net-run        v2.18.0.231229151826_79175
+Backend            v2.18.0.231229151826_79175
+
+Qnn Init/Prepare/Finalize/De-Init/Execute/Lib-Load Statistics:
+------------------------------------------------------------
+Init Stats:
+-----------
+    NetRun: 41655 us
+
+Compose Graphs Stats:
+--------------
+    NetRun: 29674 us
+
+Finalize Stats:
+---------------
+Graph 0 (resnet18_fp32):
+    NetRun: 11969 us
+    Backend (GRAPH_FINALIZE): 11964 us
+        _conv1: 42 us
+        _relu: 3 us
+        _maxpool: 2 us
+        _layer1_0_conv1: 61 us
+        _layer1_0_relu: 3 us
+        _layer1_0_conv2: 48 us
+        _module_add: 3 us
+        _module_layer1_0_relu_1: 2 us
+        _layer1_1_conv1: 49 us
+        _layer1_1_relu: 3 us
+        _layer1_1_conv2: 48 us
+        _module_add_1: 3 us
+        _module_layer1_1_relu_1: 2 us
+        _layer2_0_conv1: 89 us
+        _layer2_0_relu: 2 us
+        _layer2_0_conv2: 162 us
+        _layer2_0_downsample_0: 16 us
+        _module_add_2: 3 us
+        _module_layer2_0_relu_1: 3 us
+        _layer2_1_conv1: 159 us
+        _layer2_1_relu: 3 us
+        _layer2_1_conv2: 168 us
+        _module_add_3: 3 us
+        _module_layer2_1_relu_1: 2 us
+        _layer3_0_conv1: 320 us
+        _layer3_0_relu: 2 us
+        _layer3_0_conv2: 610 us
+        _layer3_0_downsample_0: 50 us
+        _module_add_4: 3 us
+        _module_layer3_0_relu_1: 2 us
+        _layer3_1_conv1: 685 us
+        _layer3_1_relu: 3 us
+        _layer3_1_conv2: 626 us
+        _module_add_5: 3 us
+        _module_layer3_1_relu_1: 2 us
+        _layer4_0_conv1: 1221 us
+        _layer4_0_relu: 3 us
+        _layer4_0_conv2: 2448 us
+        _layer4_0_downsample_0: 151 us
+        _module_add_6: 4 us
+        _module_layer4_0_relu_1: 3 us
+        _layer4_1_conv1: 2326 us
+        _layer4_1_relu: 4 us
+        _layer4_1_conv2: 2459 us
+        _module_add_7: 4 us
+        _module_layer4_1_relu_1: 3 us
+        _avgpool: 2 us
+        __330_nchw: 3 us
+        _fc: 4 us
+
+De-Init Stats:
+--------------
+    NetRun: 16473 us
+    Backend (null): 0 us
+
+Execute Stats (Average):
+------------------------
+Total Inference Time: 
+---------------------
+Graph 0 (resnet18_fp32):
+    NetRun: 1657404 us
+    Backend (GRAPH_EXECUTE): 1655106 us
+        _conv1: 117079 us
+        _relu: 9680 us
+        _maxpool: 6509 us
+        _layer1_0_conv1: 84684 us
+        _layer1_0_relu: 1917 us
+        _layer1_0_conv2: 85721 us
+        _module_add: 3955 us
+        _module_layer1_0_relu_1: 2036 us
+        _layer1_1_conv1: 88531 us
+        _layer1_1_relu: 2462 us
+        _layer1_1_conv2: 84341 us
+        _module_add_1: 3897 us
+        _module_layer1_1_relu_1: 2155 us
+        _layer2_0_conv1: 42640 us
+        _layer2_0_relu: 1070 us
+        _layer2_0_conv2: 79558 us
+        _layer2_0_downsample_0: 7995 us
+        _module_add_2: 1661 us
+        _module_layer2_0_relu_1: 790 us
+        _layer2_1_conv1: 79815 us
+        _layer2_1_relu: 1165 us
+        _layer2_1_conv2: 79876 us
+        _module_add_3: 1974 us
+        _module_layer2_1_relu_1: 1081 us
+        _layer3_0_conv1: 49503 us
+        _layer3_0_relu: 436 us
+        _layer3_0_conv2: 98387 us
+        _layer3_0_downsample_0: 8620 us
+        _module_add_4: 831 us
+        _module_layer3_0_relu_1: 358 us
+        _layer3_1_conv1: 96517 us
+        _layer3_1_relu: 645 us
+        _layer3_1_conv2: 96303 us
+        _module_add_5: 970 us
+        _module_layer3_1_relu_1: 444 us
+        _layer4_0_conv1: 63428 us
+        _layer4_0_relu: 231 us
+        _layer4_0_conv2: 145431 us
+        _layer4_0_downsample_0: 9594 us
+        _module_add_6: 443 us
+        _module_layer4_0_relu_1: 180 us
+        _layer4_1_conv1: 143918 us
+        _layer4_1_relu: 599 us
+        _layer4_1_conv2: 141914 us
+        _module_add_7: 1083 us
+        _module_layer4_1_relu_1: 567 us
+        _avgpool: 1020 us
+        __330_nchw: 239 us
+        _fc: 2524 us
+
+Execute Stats (Overall):
+------------------------
+    NetRun IPS (includes IO and misc. time): 0.5948 inf/sec 
+

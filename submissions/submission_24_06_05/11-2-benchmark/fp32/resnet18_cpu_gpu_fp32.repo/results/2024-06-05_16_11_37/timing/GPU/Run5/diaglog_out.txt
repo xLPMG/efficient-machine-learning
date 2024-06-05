@@ -1,0 +1,73 @@
+Log File Created: Tue Mar  7 14:42:00 2023
+Time Scale: 1e-06
+Epoch Timestamp: 1678200120132313 Steady Clock Timestamp: 1219342660440
+Generated using: 
+qnn-profile-viewer v2.18.0.231229151826_79175
+qnn-net-run        v2.18.0.231229151826_79175
+Backend            v2.18.0.231229151826_79175
+
+Qnn Init/Prepare/Finalize/De-Init/Execute/Lib-Load Statistics:
+------------------------------------------------------------
+Init Stats:
+-----------
+    NetRun: 770001 us
+
+Compose Graphs Stats:
+--------------
+    NetRun: 23609 us
+
+Finalize Stats:
+---------------
+Graph 0 (resnet18_fp32):
+    NetRun: 746385 us
+    Backend (QnnGraph_finalize): 746364 us
+
+De-Init Stats:
+--------------
+    NetRun: 104319 us
+    Backend (QnnContext_free): 104312 us
+
+Execute Stats (Average):
+------------------------
+Total Inference Time: 
+---------------------
+Graph 0 (resnet18_fp32):
+    NetRun: 428665 us
+    Backend (QnnGraph_execute): 428632 us
+        conv1: 17366 us
+        maxpool: 2679 us
+        layer1_0_conv1: 16142 us
+        layer1_0_conv2: 16139 us
+        module_add: 1397 us
+        layer1_1_conv1: 16140 us
+        layer1_1_conv2: 16137 us
+        module_add_1: 1376 us
+        layer2_0_conv1: 8305 us
+        layer2_0_conv2: 16429 us
+        layer2_0_downsample_0: 1119 us
+        module_add_2: 671 us
+        layer2_1_conv1: 16433 us
+        layer2_1_conv2: 16425 us
+        module_add_3: 692 us
+        layer3_0_conv1: 12841 us
+        layer3_0_conv2: 25536 us
+        layer3_0_downsample_0: 1532 us
+        module_add_4: 404 us
+        layer3_1_conv1: 25532 us
+        layer3_1_conv2: 25532 us
+        module_add_5: 392 us
+        layer4_0_conv1: 20523 us
+        layer4_0_conv2: 41406 us
+        layer4_0_downsample_0: 1898 us
+        module_add_6: 231 us
+        layer4_1_conv1: 41227 us
+        layer4_1_conv2: 41317 us
+        module_add_7: 249 us
+        avgpool: 963 us
+        _330_nchw: 387 us
+        fc: 5782 us
+
+Execute Stats (Overall):
+------------------------
+    NetRun IPS (includes IO and misc. time): 2.1141 inf/sec 
+

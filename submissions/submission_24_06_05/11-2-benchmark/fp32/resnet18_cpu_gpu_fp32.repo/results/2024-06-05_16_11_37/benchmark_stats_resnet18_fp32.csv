@@ -1,0 +1,181 @@
+QNN SDK version:,2.18.0.240101
+
+Configuration used:
+Name,resnet18_fp32
+HostRootPath,/home/eml_17/efficient-machine-learning/submissions/submission_24_06_05/11-2-benchmark/fp32/resnet18_cpu_gpu_fp32.repo
+HostResultsDir,/home/eml_17/efficient-machine-learning/submissions/submission_24_06_05/11-2-benchmark/fp32/resnet18_cpu_gpu_fp32.repo/results
+DevicePath,/data/local/tmp/eml_17/qnnbm.repo
+Devices,646f926
+HostName,localhost
+Graph Prepare,BACKEND PREPARE
+Runs,10
+Model:Name,resnet18_fp32
+Model:qnn_model,/home/eml_17/efficient-machine-learning/submissions/submission_24_06_05/11-2-benchmark/fp32/model_libs/aarch64-android/libresnet18_fp32.so
+Model:InputList,target_raw_list.txt
+Model:Data,data
+Backends,"CPU,GPU"
+Architectures,aarch64
+Compiler,clang9.0
+C++ Standard Library,libc++_shared.so
+Measurements,timing
+PerfProfile,high_performance
+ProfilingLevel,detailed
+SharedBuffer,No
+Date,2024-06-05 16:15:37.325038
+
+Device Info:
+ro.product.name,kalama
+ro.serialno,646f926
+ro.product.model,Kalama for arm64
+ro.product.board,kalama
+ro.product.brand,qti
+ro.product.device,kalama
+ro.product.manufacturer,QUALCOMM
+ro.product.cpu.abi,arm64-v8a
+ro.build.au_rev,unknown
+ro.build.description,kalama-userdebug 13 TKQ1.230127.002 eng.lnxbui.20230221.040141 test-keys
+ro.build.version.sdk,33
+Meta_Build_ID,unknown
+OS_Type,unknown
+
+,, ,CPU_timing(10 runs), , ,GPU_timing(10 runs), , 
+,, ,avg (us),max (us),min (us),std_dev (us),avg (us),max (us),min (us),std_dev (us)
+,,Init Stats [NetRun],46733,52262,38803, ,769046,814087,747510, 
+,,Finalize Stats [NetRun],12365,13628,10952, ,745929,790685,725545, 
+,,Finalize Stats [Backend(GRAPH_FINALIZE)],12360,13624,10948, ,745906,790664,725529, 
+,,Finalize Stats [_conv1],41,45,40, , , , , 
+,,Finalize Stats [_relu],3,4,3, , , , , 
+,,Finalize Stats [_maxpool],2,3,2, , , , , 
+,,Finalize Stats [_layer1_0_conv1],62,65,58, , , , , 
+,,Finalize Stats [_layer1_0_relu],3,4,3, , , , , 
+,,Finalize Stats [_layer1_0_conv2],49,56,44, , , , , 
+,,Finalize Stats [_module_add],3,4,3, , , , , 
+,,Finalize Stats [_module_layer1_0_relu_1],2,3,2, , , , , 
+,,Finalize Stats [_layer1_1_conv1],55,62,49, , , , , 
+,,Finalize Stats [_layer1_1_relu],2,3,2, , , , , 
+,,Finalize Stats [_layer1_1_conv2],53,63,45, , , , , 
+,,Finalize Stats [_module_add_1],2,4,2, , , , , 
+,,Finalize Stats [_module_layer1_1_relu_1],2,3,2, , , , , 
+,,Finalize Stats [_layer2_0_conv1],95,104,89, , , , , 
+,,Finalize Stats [_layer2_0_relu],2,3,2, , , , , 
+,,Finalize Stats [_layer2_0_conv2],177,193,154, , , , , 
+,,Finalize Stats [_layer2_0_downsample_0],18,22,15, , , , , 
+,,Finalize Stats [_module_add_2],2,3,2, , , , , 
+,,Finalize Stats [_module_layer2_0_relu_1],2,3,1, , , , , 
+,,Finalize Stats [_layer2_1_conv1],178,192,159, , , , , 
+,,Finalize Stats [_layer2_1_relu],2,3,2, , , , , 
+,,Finalize Stats [_layer2_1_conv2],180,211,168, , , , , 
+,,Finalize Stats [_module_add_3],3,4,2, , , , , 
+,,Finalize Stats [_module_layer2_1_relu_1],2,3,2, , , , , 
+,,Finalize Stats [_layer3_0_conv1],337,373,298, , , , , 
+,,Finalize Stats [_layer3_0_relu],2,3,2, , , , , 
+,,Finalize Stats [_layer3_0_conv2],663,770,607, , , , , 
+,,Finalize Stats [_layer3_0_downsample_0],54,73,42, , , , , 
+,,Finalize Stats [_module_add_4],3,4,2, , , , , 
+,,Finalize Stats [_module_layer3_0_relu_1],2,3,2, , , , , 
+,,Finalize Stats [_layer3_1_conv1],664,735,558, , , , , 
+,,Finalize Stats [_layer3_1_relu],3,4,2, , , , , 
+,,Finalize Stats [_layer3_1_conv2],656,738,595, , , , , 
+,,Finalize Stats [_module_add_5],3,4,2, , , , , 
+,,Finalize Stats [_module_layer3_1_relu_1],2,4,1, , , , , 
+,,Finalize Stats [_layer4_0_conv1],1300,1460,1085, , , , , 
+,,Finalize Stats [_layer4_0_relu],4,8,3, , , , , 
+,,Finalize Stats [_layer4_0_conv2],2544,2856,2163, , , , , 
+,,Finalize Stats [_layer4_0_downsample_0],160,179,149, , , , , 
+,,Finalize Stats [_module_add_6],3,5,3, , , , , 
+,,Finalize Stats [_module_layer4_0_relu_1],2,3,2, , , , , 
+,,Finalize Stats [_layer4_1_conv1],2414,2697,2223, , , , , 
+,,Finalize Stats [_layer4_1_relu],3,4,3, , , , , 
+,,Finalize Stats [_layer4_1_conv2],2430,2655,2154, , , , , 
+,,Finalize Stats [_module_add_7],4,5,3, , , , , 
+,,Finalize Stats [_module_layer4_1_relu_1],4,17,2, , , , , 
+,,Finalize Stats [_avgpool],2,3,2, , , , , 
+,,Finalize Stats [__330_nchw],2,4,2, , , , , 
+,,Finalize Stats [_fc],4,4,4, , , , , 
+,,De-Init Stats [NetRun],24897,35380,13352, ,94437,104979,80576, 
+,,De-Init Stats [Backend(null)],1,3,0, , , , , 
+,,Total Inference Time [NetRun],1644305,1668083,1592255,22668.648904746544,423662,428665,421595,2106.175736574072
+,,Total Inference Time [Backend(GRAPH_EXECUTE)],1642143,1665847,1590351,22571.34718201621,423625,428632,421528,2109.7736687458523
+,,Total Inference Time [_conv1],119016,133264,109241,6532.182202160487, , , , 
+,,Total Inference Time [_relu],8789,9962,6761,973.2144048347095, , , , 
+,,Total Inference Time [_maxpool],6508,7431,5865,394.96763580492683, , , , 
+,,Total Inference Time [_layer1_0_conv1],84435,85760,83315,864.0160749533412, , , , 
+,,Total Inference Time [_layer1_0_relu],1812,2081,1355,209.8956354424212, , , , 
+,,Total Inference Time [_layer1_0_conv2],84707,89633,82742,1965.790584528836, , , , 
+,,Total Inference Time [_module_add],3786,4229,2558,471.5329138977351, , , , 
+,,Total Inference Time [_module_layer1_0_relu_1],2045,2560,1415,337.74092635233495, , , , 
+,,Total Inference Time [_layer1_1_conv1],88019,92167,85438,2206.0026795591666, , , , 
+,,Total Inference Time [_layer1_1_relu],2406,2536,1775,228.03108949829138, , , , 
+,,Total Inference Time [_layer1_1_conv2],83449,84341,82702,559.4727776120022, , , , 
+,,Total Inference Time [_module_add_1],3705,3945,2633,392.8321807365357, , , , 
+,,Total Inference Time [_module_layer1_1_relu_1],2054,2470,1406,295.6991902442601, , , , 
+,,Total Inference Time [_layer2_0_conv1],42213,43023,41477,494.3138903796071, , , , 
+,,Total Inference Time [_layer2_0_relu],1017,1087,706,114.44887262198979, , , , 
+,,Total Inference Time [_layer2_0_conv2],79664,80683,77734,801.8365308603882, , , , 
+,,Total Inference Time [_layer2_0_downsample_0],7914,8145,7128,295.6229580620107, , , , 
+,,Total Inference Time [_module_add_2],1660,1794,1163,181.8094545885273, , , , 
+,,Total Inference Time [_module_layer2_0_relu_1],856,1023,636,115.06273651071112, , , , 
+,,Total Inference Time [_layer2_1_conv1],79692,81182,78741,644.8193890109419, , , , 
+,,Total Inference Time [_layer2_1_relu],1117,1165,849,97.22876803360893, , , , 
+,,Total Inference Time [_layer2_1_conv2],79459,80830,77311,982.4857137779551, , , , 
+,,Total Inference Time [_module_add_3],1931,2178,1283,238.3566189090997, , , , 
+,,Total Inference Time [_module_layer2_1_relu_1],1063,1360,663,174.74667378808675, , , , 
+,,Total Inference Time [_layer3_0_conv1],49153,49503,48451,282.63097258911074, , , , 
+,,Total Inference Time [_layer3_0_relu],409,440,275,49.56264274184293, , , , 
+,,Total Inference Time [_layer3_0_conv2],96194,99057,94716,1402.9918982897466, , , , 
+,,Total Inference Time [_layer3_0_downsample_0],7766,8620,7512,310.2596761853958, , , , 
+,,Total Inference Time [_module_add_4],819,853,633,65.97608994510394, , , , 
+,,Total Inference Time [_module_layer3_0_relu_1],367,400,280,32.828849101565126, , , , 
+,,Total Inference Time [_layer3_1_conv1],95808,96517,94801,519.8469967211506, , , , 
+,,Total Inference Time [_layer3_1_relu],519,645,452,64.32288343453932, , , , 
+,,Total Inference Time [_layer3_1_conv2],95752,96303,94691,507.66388705739377, , , , 
+,,Total Inference Time [_module_add_5],933,979,884,32.93090409394258, , , , 
+,,Total Inference Time [_module_layer3_1_relu_1],402,444,351,28.151376520518493, , , , 
+,,Total Inference Time [_layer4_0_conv1],63722,64097,63102,313.1667819762073, , , , 
+,,Total Inference Time [_layer4_0_relu],221,242,140,30.048294460751013, , , , 
+,,Total Inference Time [_layer4_0_conv2],143640,147553,135184,3597.3256053784053, , , , 
+,,Total Inference Time [_layer4_0_downsample_0],9452,9710,9050,197.43015642668843, , , , 
+,,Total Inference Time [_module_add_6],477,603,406,52.587387588026594, , , , 
+,,Total Inference Time [_module_layer4_0_relu_1],204,278,180,29.758472183004734, , , , 
+,,Total Inference Time [_layer4_1_conv1],141127,144986,135832,3104.2826761320134, , , , 
+,,Total Inference Time [_layer4_1_relu],574,636,471,57.00526291492742, , , , 
+,,Total Inference Time [_layer4_1_conv2],141976,145436,137223,2619.5258455597564, , , , 
+,,Total Inference Time [_module_add_7],990,1118,631,153.76880192173067, , , , 
+,,Total Inference Time [_module_layer4_1_relu_1],483,567,326,82.26252015482034, , , , 
+,,Total Inference Time [_avgpool],811,1026,470,193.1708800230741, , , , 
+,,Total Inference Time [__330_nchw],205,300,118,51.67903077866517, , , , 
+,,Total Inference Time [_fc],2495,3036,1586,469.0042525275106, , , , 
+,,De-Init Stats [Backend(QnnContext_free)], , , , ,94431,104972,80570, 
+,,Total Inference Time [conv1], , , , ,17364,17390,17357,9.345824973989426
+,,Total Inference Time [maxpool], , , , ,2711,2752,2679,24.815989469157447
+,,Total Inference Time [layer1_0_conv1], , , , ,16142,16143,16141,0.9428090415820634
+,,Total Inference Time [layer1_0_conv2], , , , ,16137,16139,16136,0.9660917830792959
+,,Total Inference Time [module_add], , , , ,1402,1411,1392,5.926400443964466
+,,Total Inference Time [layer1_1_conv1], , , , ,16140,16143,16139,1.1737877907772674
+,,Total Inference Time [layer1_1_conv2], , , , ,16137,16138,16135,1.0540925533894598
+,,Total Inference Time [module_add_1], , , , ,1377,1386,1365,6.887186169498639
+,,Total Inference Time [layer2_0_conv1], , , , ,8305,8306,8303,0.9944289260117531
+,,Total Inference Time [layer2_0_conv2], , , , ,16429,16434,16428,1.776388345929897
+,,Total Inference Time [layer2_0_downsample_0], , , , ,1119,1120,1118,0.4714045207910317
+,,Total Inference Time [module_add_2], , , , ,671,682,662,5.769652406245015
+,,Total Inference Time [layer2_1_conv1], , , , ,16431,16433,16428,1.577621275493231
+,,Total Inference Time [layer2_1_conv2], , , , ,16429,16432,16425,1.837873166945363
+,,Total Inference Time [module_add_3], , , , ,688,692,683,3.190262963734773
+,,Total Inference Time [layer3_0_conv1], , , , ,12842,12845,12841,1.6865480854231356
+,,Total Inference Time [layer3_0_conv2], , , , ,25534,25537,25532,2.043961295567452
+,,Total Inference Time [layer3_0_downsample_0], , , , ,1530,1533,1528,1.5491933384829668
+,,Total Inference Time [module_add_4], , , , ,403,405,395,2.94580681270476
+,,Total Inference Time [layer3_1_conv1], , , , ,25533,25537,25532,1.90029237516523
+,,Total Inference Time [layer3_1_conv2], , , , ,25534,25538,25530,2.4129281427805145
+,,Total Inference Time [module_add_5], , , , ,392,396,391,1.3498971154211057
+,,Total Inference Time [layer4_0_conv1], , , , ,20540,20554,20516,13.39983416149452
+,,Total Inference Time [layer4_0_conv2], , , , ,41399,41433,41370,19.710121483362016
+,,Total Inference Time [layer4_0_downsample_0], , , , ,1896,1899,1892,2.057506581601462
+,,Total Inference Time [module_add_6], , , , ,230,234,229,1.3374935098492586
+,,Total Inference Time [layer4_1_conv1], , , , ,41247,41324,41182,44.175030654582834
+,,Total Inference Time [layer4_1_conv2], , , , ,41314,41364,41289,22.953092263232083
+,,Total Inference Time [module_add_7], , , , ,246,249,236,3.7475918193480524
+,,Total Inference Time [avgpool], , , , ,963,967,960,2.1186998109427604
+,,Total Inference Time [_330_nchw], , , , ,387,390,386,1.3165611772087666
+,,Total Inference Time [fc], , , , ,5743,5809,5492,90.13452908477046
+
