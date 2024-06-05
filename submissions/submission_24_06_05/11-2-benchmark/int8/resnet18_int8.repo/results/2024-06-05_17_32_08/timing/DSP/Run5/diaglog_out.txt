@@ -1,0 +1,50 @@
+Log File Created: Wed Apr 26 12:02:48 2023
+Time Scale: 1e-06
+Epoch Timestamp: 1682510568118380 Steady Clock Timestamp: 5529800172617
+Generated using: 
+qnn-profile-viewer v2.18.0.231229151826_79175
+qnn-net-run        v2.18.0.231229151826_79175
+Backend            v2.18.0.231229151826_79175
+
+Qnn Init/Prepare/Finalize/De-Init/Execute/Lib-Load Statistics:
+------------------------------------------------------------
+Init Stats:
+-----------
+    NetRun: 28920 us
+    Backend (RPC (load binary) time): 20450 us
+    Backend (QNN accelerator (load binary) time): 19032 us
+    Backend (Accelerator (load binary) time): 18250 us
+    Backend (QNN (load binary) time): 28852 us
+
+Compose Graphs Stats:
+--------------
+    NetRun: 0 us
+
+Finalize Stats:
+---------------
+
+De-Init Stats:
+--------------
+    NetRun: 11794 us
+    Backend (RPC (deinit) time): 4312 us
+    Backend (QNN Accelerator (deinit) time): 3532 us
+    Backend (Accelerator (deinit) time): 3433 us
+    Backend (QNN (deinit) time): 11789 us
+
+Execute Stats (Average):
+------------------------
+Total Inference Time: 
+---------------------
+Graph 0 (resnet18_int8):
+    NetRun: 21240 us
+    Backend (Number of HVX threads used): 4 count
+    Backend (RPC (execute) time): 20676 us
+    Backend (QNN accelerator (execute) time): 18187 us
+    Backend (Accelerator (execute) time): 18014 us
+    Backend (Accelerator (execute excluding wait) time): 17687 us
+    Backend (QNN (execute) time): 21224 us
+
+Execute Stats (Overall):
+------------------------
+    NetRun IPS (includes IO and misc. time): 13.5021 inf/sec 
+

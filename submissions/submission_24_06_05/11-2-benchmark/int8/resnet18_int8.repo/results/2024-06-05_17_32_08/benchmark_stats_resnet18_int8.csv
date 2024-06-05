@@ -1,0 +1,60 @@
+QNN SDK version:,2.18.0.240101
+
+Configuration used:
+Name,resnet18_int8
+HostRootPath,/home/eml_17/efficient-machine-learning/submissions/submission_24_06_05/11-2-benchmark/int8/resnet18_int8.repo
+HostResultsDir,/home/eml_17/efficient-machine-learning/submissions/submission_24_06_05/11-2-benchmark/int8/resnet18_int8.repo/results
+DevicePath,/data/local/tmp/eml_17/qnnbm.repo
+Devices,d4334008
+HostName,localhost
+Graph Prepare,X86 PREPARE
+Runs,10
+Model:Name,resnet18_int8
+Model:qnn_model,/home/eml_17/efficient-machine-learning/submissions/submission_24_06_05/11-2-benchmark/int8/model_libs/x86_64-linux-clang/libresnet18_int8.so
+Model:InputList,target_raw_list.txt
+Model:Data,data
+Backends,DSP
+Architectures,aarch64
+Compiler,clang9.0
+C++ Standard Library,libc++_shared.so
+Measurements,timing
+PerfProfile,high_performance
+ProfilingLevel,basic
+SharedBuffer,No
+Date,2024-06-05 17:33:18.519294
+
+Device Info:
+ro.product.name,kalama
+ro.serialno,d4334008
+ro.product.model,Kalama for arm64
+ro.product.board,kalama
+ro.product.brand,qti
+ro.product.device,kalama
+ro.product.manufacturer,QUALCOMM
+ro.product.cpu.abi,arm64-v8a
+ro.build.au_rev,unknown
+ro.build.description,kalama-userdebug 13 TKQ1.230127.002 eng.lnxbui.20230221.040141 test-keys
+ro.build.version.sdk,33
+Meta_Build_ID,unknown
+OS_Type,unknown
+
+,, ,DSP_timing(10 runs), , 
+,, ,avg (us),max (us),min (us),std_dev (us)
+,,Init Stats [NetRun],27095,28920,24401, 
+,,Init Stats [Backend(RPC(loadbinary)time)],19506,20450,17802, 
+,,Init Stats [Backend(QNNaccelerator(loadbinary)time)],18025,19032,16812, 
+,,Init Stats [Backend(Accelerator(loadbinary)time)],17250,18250,16006, 
+,,Init Stats [Backend(QNN(loadbinary)time)],27032,28852,24354, 
+,,De-Init Stats [NetRun],11665,12760,8453, 
+,,De-Init Stats [Backend(RPC(deinit)time)],4271,4533,3859, 
+,,De-Init Stats [Backend(QNNAccelerator(deinit)time)],3440,3595,3175, 
+,,De-Init Stats [Backend(Accelerator(deinit)time)],3347,3497,3110, 
+,,De-Init Stats [Backend(QNN(deinit)time)],11658,12750,8449, 
+,,Total Inference Time [NetRun],20347,21280,18690,896.4401510666758
+,,Total Inference Time [Backend(NumberofHVXthreadsused)],4,4,4, 
+,,Total Inference Time [Backend(RPC(execute)time)],19817,20692,18341,863.8392661703783
+,,Total Inference Time [Backend(QNNaccelerator(execute)time)],17752,18187,17329,303.97223922954254
+,,Total Inference Time [Backend(Accelerator(execute)time)],17589,18014,17181,289.5464652789869
+,,Total Inference Time [Backend(Accelerator(executeexcludingwait)time)],17286,17687,16901,272.67377741339357
+,,Total Inference Time [Backend(QNN(execute)time)],20333,21263,18683,894.0537145185655
+

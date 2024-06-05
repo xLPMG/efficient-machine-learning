@@ -1,0 +1,41 @@
+Log File Created: Tue Mar  7 15:09:47 2023
+Time Scale: 1e-06
+Epoch Timestamp: 1678201787624412 Steady Clock Timestamp: 1221010152538
+Generated using: 
+qnn-profile-viewer v2.18.0.231229151826_79175
+qnn-net-run        v2.18.0.231229151826_79175
+Backend            v2.18.0.231229151826_79175
+
+Qnn Init/Prepare/Finalize/De-Init/Execute/Lib-Load Statistics:
+------------------------------------------------------------
+Init Stats:
+-----------
+    NetRun: 62400 us
+
+Compose Graphs Stats:
+--------------
+    NetRun: 50298 us
+
+Finalize Stats:
+---------------
+Graph 0 (resnet18_int8):
+    NetRun: 12095 us
+    Backend (GRAPH_FINALIZE): 12090 us
+
+De-Init Stats:
+--------------
+    NetRun: 18590 us
+    Backend (null): 1 us
+
+Execute Stats (Average):
+------------------------
+Total Inference Time: 
+---------------------
+Graph 0 (resnet18_int8):
+    NetRun: 1664312 us
+    Backend (GRAPH_EXECUTE): 1661959 us
+
+Execute Stats (Overall):
+------------------------
+    NetRun IPS (includes IO and misc. time): 0.5910 inf/sec 
+

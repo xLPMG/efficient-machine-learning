@@ -3,11 +3,11 @@
   "HostRootPath": "resnet18_int8.repo",
   "HostResultsDir":"resnet18_int8.repo/results",
   "DevicePath":"/data/local/tmp/eml_17/qnnbm.repo",
-  "Devices":["646f926"],
+  "Devices":["d4334008"],
   "Runs":10,
   "Model": {
     "Name": "resnet18_int8",
-    "qnn_model": "model_libs/aarch64-android/libresnet18_int8.so",
+    "qnn_model": "model_libs/x86_64-linux-clang/libresnet18_int8.so",
     "InputList": "target_raw_list.txt",
     "Data": [
       "data"
