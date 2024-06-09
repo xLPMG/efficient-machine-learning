@@ -1,4 +1,0 @@
-VS code ssh "sysgen.eml", eml_17, port (matrix)
-
-#omp parallel for collapse(2)
-

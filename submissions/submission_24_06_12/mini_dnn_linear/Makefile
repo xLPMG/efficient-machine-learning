@@ -46,7 +46,7 @@ ${BUILD_DIR}/tests/MatmulReluAten.test.o: src/backend/MatmulReluAten.test.cpp
 		$(CXX) ${OPTIONS} ${CXXFLAGS} -c src/backend/MatmulReluAten.test.cpp -I${LIBXSMM_DIR}/include -o ${BUILD_DIR}/tests/MatmulReluAten.test.o
 
 matmul: ${BUILD_DIR}/backend/gemm_asm_asimd_64_64_64.o ${BUILD_DIR}/backend/MatmulAsmNeon.o ${BUILD_DIR}/backend/MatmulAtenBlocked.o ${BUILD_DIR}/tests/MatmulAtenBlocked.test.o ${BUILD_DIR}/backend/MatmulLibxsmm.o ${BUILD_DIR}/tests/MatmulLibxsmm.test.o ${BUILD_DIR}/backend/MatmulReluAten.o ${BUILD_DIR}/tests/MatmulReluAten.test.o
-		$(CXX) ${OPTIONS} ${CXXFLAGS} src/performance_matmul.cpp  ${BUILD_DIR}/backend/Matmul*.o -o ${BUILD_DIR}/performance_matmul ${RPATHS} ${LDFLAGS}
+		$(CXX) ${OPTIONS} ${CXXFLAGS} src/performance_matmul.cpp  ${BUILD_DIR}/backend/gemm_asm_asimd_64_64_64.o ${BUILD_DIR}/backend/Matmul*.o -o ${BUILD_DIR}/performance_matmul ${RPATHS} ${LDFLAGS}
 
 all: matmul
 		$(CXX) ${OPTIONS} ${CXXFLAGS} src/test.cpp ${BUILD_DIR}/backend/*.o ${BUILD_DIR}/tests/*.o -o ${BUILD_DIR}/test ${RPATHS} ${LDFLAGS}

@@ -1,0 +1,93 @@
+##################################################
+OUTPUT ACCURACY TESTS
+##################################################
+
+(venv_pytorch_old) [eml_17@grace mini_dnn_linear]$ LIBXSMM_TARGET=aarch64 ./build/test
+===============================================================================
+All tests passed (4 assertions in 4 test cases)
+
+##################################################
+OUTPUT PERFORMANCE TESTS
+##################################################
+
+SINGLE CORE
+==================================================
+running performance tests
+Dimensions for MatmulReluAten, MatmulAtenBlocked and MatmulLibxsmm:
+  n: 128
+  k: 768
+  c: 512
+  bn: 64
+  bk: 16
+  bc: 128
+  nb: 2
+  kb: 48
+  cb: 4
+Dimensions for MatmulAsmNeon:
+  n: 256
+  k: 4096
+  c: 4096
+  b_: 64
+  nb: 4
+  kb: 64
+  cb: 64
+benchmarking MatmulReluAten..
+  repetitions:         715
+  duration in seconds: 0.997882
+  FP32 GFLOPS:         72.127
+benchmarking MatmulAtenBlocked..
+  repetitions:         222
+  duration in seconds: 0.977289
+  FP32 GFLOPS:         22.8666
+benchmarking MatmulAsmNeon..
+  repetitions:         10
+  duration in seconds: 0.948775
+  FP32 GFLOPS:         90.5371
+benchmarking MatmulLibxsmm..
+  repetitions:         762
+  duration in seconds: 0.997927
+  FP32 GFLOPS:         76.8648
+
+72 THREADS AND CORES
+==================================================
+running performance tests
+Dimensions for MatmulReluAten, MatmulAtenBlocked and MatmulLibxsmm:
+  n: 128
+  k: 768
+  c: 512
+  bn: 64
+  bk: 16
+  bc: 128
+  nb: 2
+  kb: 48
+  cb: 4
+Dimensions for MatmulAsmNeon:
+  n: 256
+  k: 4096
+  c: 4096
+  b_: 64
+  nb: 4
+  kb: 64
+  cb: 64
+benchmarking MatmulReluAten..
+  repetitions:         662
+  duration in seconds: 0.983523
+  FP32 GFLOPS:         67.7555
+benchmarking MatmulAtenBlocked..
+  repetitions:         217
+  duration in seconds: 0.989894
+  FP32 GFLOPS:         22.0669
+benchmarking MatmulAsmNeon..
+  repetitions:         596
+  duration in seconds: 0.99858
+  FP32 GFLOPS:         5126.88
+benchmarking MatmulLibxsmm..
+  repetitions:         21375
+  duration in seconds: 1.05324
+  FP32 GFLOPS:         2042.92
+
+COMPARISON
+==================================================
+             Single Core vs 72 Threads/Cores
+MatmulAsmNeon: 90 GFLOPS vs 5127 GFLOPS
+MatmulLibxsmm: 77 GFLOPS vs 2043 GFLOPS

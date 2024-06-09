@@ -1,9 +1,10 @@
 #include "MatmulAsmNeon.h"
 
-extern "C" {
-  void gemm_asm_asimd_64_64_64( float const * i_a,
-                                float const * i_b,
-                                float       * io_c );
+extern "C"
+{
+  void gemm_asm_asimd_64_64_64(float const *i_a,
+                               float const *i_b,
+                               float *io_c);
 }
 
 at::Tensor mini_dnn::backend::MatmulAsmNeon::forward(at::Tensor i_x,
@@ -28,10 +29,6 @@ at::Tensor mini_dnn::backend::MatmulAsmNeon::forward(at::Tensor i_x,
   float *l_ptr_b = (float *)i_w.data_ptr();
   float *l_ptr_c = (float *)l_y.data_ptr();
 
-  std::cout << "l_strides_a: " << l_strides_a << std::endl;
-  std::cout << "l_strides_b: " << l_strides_b << std::endl;
-  std::cout << "l_strides_c: " << l_strides_c << std::endl;
-
   // loop over outer dimensions
 #pragma omp parallel for collapse(2)
   for (int64_t l_kb = 0; l_kb < l_sizes.kb; l_kb++)
@@ -42,9 +39,9 @@ at::Tensor mini_dnn::backend::MatmulAsmNeon::forward(at::Tensor i_x,
 
       for (int64_t l_cb = 0; l_cb < l_sizes.cb; l_cb++)
       {
-        float const *l_ptr_a_offset = l_ptr_a + l_nb * l_strides_a[0] + l_cb * l_strides_a[1];
+        float *l_ptr_a_offset = l_ptr_a + l_nb * l_strides_a[0] + l_cb * l_strides_a[1];
 
-        float const *l_ptr_b_offset = l_ptr_b + l_kb * l_strides_b[0] + l_cb * l_strides_b[1];
+        float *l_ptr_b_offset = l_ptr_b + l_kb * l_strides_b[0] + l_cb * l_strides_b[1];
 
         gemm_asm_asimd_64_64_64(l_ptr_a_offset, l_ptr_b_offset, l_ptr_c_offset);
       }

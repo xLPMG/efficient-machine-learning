@@ -108,9 +108,9 @@ int main()
   int64_t l_size_kb = l_size_k / l_size_bk;
   int64_t l_size_cb = l_size_c / l_size_bc;
 
-  MINI_DNN_LOG_INFO << "here are our dimensions:" << std::endl;
+  MINI_DNN_LOG_INFO << "Dimensions for MatmulReluAten, MatmulAtenBlocked and MatmulLibxsmm:" << std::endl;
   MINI_DNN_LOG_INFO << "  n: " << l_size_n << std::endl;
-  MINI_DNN_LOG_INFO << "  k: " << l_size_k << std::endl;
+  MINI_DNN_LOG_INFO << "  k: " << l_size_k << std::endl; 
   MINI_DNN_LOG_INFO << "  c: " << l_size_c << std::endl;
 
   MINI_DNN_LOG_INFO << "  bn: " << l_size_bn << std::endl;
@@ -121,6 +121,27 @@ int main()
   MINI_DNN_LOG_INFO << "  kb: " << l_size_kb << std::endl;
   MINI_DNN_LOG_INFO << "  cb: " << l_size_cb << std::endl;
 
+  int64_t l_size_n_neon = 256;
+  int64_t l_size_k_neon = 4096;
+  int64_t l_size_c_neon = 4096;
+
+  int64_t l_size_bx_neon = 64;
+
+  int64_t l_size_nb_neon = l_size_n_neon / l_size_bx_neon;
+  int64_t l_size_kb_neon = l_size_k_neon / l_size_bx_neon;
+  int64_t l_size_cb_neon = l_size_c_neon / l_size_bx_neon;
+
+  MINI_DNN_LOG_INFO << "Dimensions for MatmulAsmNeon:" << std::endl;
+  MINI_DNN_LOG_INFO << "  n: " << l_size_n_neon << std::endl;
+  MINI_DNN_LOG_INFO << "  k: " << l_size_k_neon << std::endl; 
+  MINI_DNN_LOG_INFO << "  c: " << l_size_c_neon << std::endl;
+
+  MINI_DNN_LOG_INFO << "  b_: " << l_size_bx_neon << std::endl;
+
+  MINI_DNN_LOG_INFO << "  nb: " << l_size_nb_neon << std::endl;
+  MINI_DNN_LOG_INFO << "  kb: " << l_size_kb_neon << std::endl;
+  MINI_DNN_LOG_INFO << "  cb: " << l_size_cb_neon << std::endl;
+
   // construct input and weight tensors
   at::Tensor l_input = at::rand({l_size_n, l_size_c}) - 0.5f;
   at::Tensor l_weight = at::rand({l_size_c, l_size_k}) - 0.5f;
@@ -130,6 +151,9 @@ int main()
 
   at::Tensor l_input_blocked = at::rand({l_size_nb, l_size_cb, l_size_bc, l_size_bn}) - 0.5f;
   at::Tensor l_weight_blocked = at::rand({l_size_kb, l_size_cb, l_size_bk, l_size_bc}) - 0.5f;
+
+  at::Tensor l_input_blocked_neon = at::rand({l_size_nb_neon, l_size_cb_neon, l_size_bx_neon, l_size_bx_neon}) - 0.5f;
+  at::Tensor l_weight_blocked_neon = at::rand({l_size_kb_neon, l_size_cb_neon, l_size_bx_neon, l_size_bx_neon}) - 0.5f;
 
   uint64_t l_n_repetitions = 0;
   double l_time = 0;
@@ -167,21 +191,20 @@ int main()
   MINI_DNN_LOG_INFO << "  duration in seconds: " << l_time << std::endl;
   MINI_DNN_LOG_INFO << "  FP32 GFLOPS:         " << l_gflops << std::endl;
 
-  // /*
-  //  * MatmulAsmNeon
-  //  */
-  // MINI_DNN_LOG_INFO << "benchmarking MatmulAsmNeon.." << std::endl;
-  // mini_dnn::backend::MatmulAsmNeon l_matmul_asm_neon;
+  /*
+   * MatmulAsmNeon
+   */
+  MINI_DNN_LOG_INFO << "benchmarking MatmulAsmNeon.." << std::endl;
+  mini_dnn::backend::MatmulAsmNeon l_matmul_asm_neon;
 
-  // std::tie(l_n_repetitions,
-  //          l_time,
-  //          l_gflops) = benchMatmul(l_input_col_major,
-  //                                  l_weight_col_major,
-  //                                  l_matmul_asm_neon);
-
-  // MINI_DNN_LOG_INFO << "  repetitions:         " << l_n_repetitions << std::endl;
-  // MINI_DNN_LOG_INFO << "  duration in seconds: " << l_time << std::endl;
-  // MINI_DNN_LOG_INFO << "  FP32 GFLOPS:         " << l_gflops << std::endl;
+  std::tie(l_n_repetitions,
+           l_time,
+           l_gflops) = benchMatmul(l_input_blocked_neon,
+                                   l_weight_blocked_neon,
+                                   l_matmul_asm_neon);
+  MINI_DNN_LOG_INFO << "  repetitions:         " << l_n_repetitions << std::endl;
+  MINI_DNN_LOG_INFO << "  duration in seconds: " << l_time << std::endl;
+  MINI_DNN_LOG_INFO << "  FP32 GFLOPS:         " << l_gflops << std::endl;
 
   /*
    * MatmulLibxsmm
