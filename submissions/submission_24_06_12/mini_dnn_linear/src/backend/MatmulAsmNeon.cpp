@@ -29,8 +29,8 @@ at::Tensor mini_dnn::backend::MatmulAsmNeon::forward(at::Tensor i_x,
   float *l_ptr_b = (float *)i_w.data_ptr();
   float *l_ptr_c = (float *)l_y.data_ptr();
 
-  // loop over outer dimensions
-  #pragma omp parallel for
+  //loop over outer dimensions
+#pragma omp parallel for collapse(2)
   for (int64_t l_kb = 0; l_kb < l_sizes.kb; l_kb++)
   {
     for (int64_t l_nb = 0; l_nb < l_sizes.nb; l_nb++)
@@ -39,9 +39,9 @@ at::Tensor mini_dnn::backend::MatmulAsmNeon::forward(at::Tensor i_x,
 
       for (int64_t l_cb = 0; l_cb < l_sizes.cb; l_cb++)
       {
-        float *l_ptr_a_offset = l_ptr_a + (l_kb * l_sizes.cb + l_cb) * l_sizes.bk * l_sizes.bc;
+        float const *l_ptr_a_offset = l_ptr_a + (l_kb * l_sizes.cb + l_cb) * l_sizes.bk * l_sizes.bc;
 
-        float *l_ptr_b_offset = l_ptr_b + (l_cb * l_sizes.nb + l_nb) * l_sizes.bc * l_sizes.bn;
+        float const *l_ptr_b_offset = l_ptr_b + (l_cb * l_sizes.nb + l_nb) * l_sizes.bc * l_sizes.bn;
 
         gemm_asm_asimd_64_64_64(l_ptr_a_offset, l_ptr_b_offset, l_ptr_c_offset);
       }

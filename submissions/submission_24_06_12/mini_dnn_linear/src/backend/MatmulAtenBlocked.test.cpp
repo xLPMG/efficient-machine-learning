@@ -40,7 +40,7 @@ TEST_CASE("Tests the Matmul forward operator through blocked Aten calls.",
   at::Tensor l_y_blocked = l_matmul_aten_blocked.forward(l_x_blocked, l_w_blocked);
 
   // reverse blocking
-  at::Tensor l_y = l_y_blocked.view({l_size_kb * l_size_nb, l_size_bk * l_size_bn}).contiguous();
+  at::Tensor l_y = l_y_blocked.permute({1, 3, 0, 2}).contiguous().view({l_size_n, l_size_k}).contiguous();
 
   // compute reference
   at::Tensor l_reference = at::matmul(l_x, l_w);
