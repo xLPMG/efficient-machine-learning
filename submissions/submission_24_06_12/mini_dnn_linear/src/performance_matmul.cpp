@@ -183,19 +183,19 @@ int main()
   // MINI_DNN_LOG_INFO << "  duration in seconds: " << l_time << std::endl;
   // MINI_DNN_LOG_INFO << "  FP32 GFLOPS:         " << l_gflops << std::endl;
 
-  // /*
-  //  * MatmulLibxsmm
-  //  */
-  // MINI_DNN_LOG_INFO << "benchmarking MatmulLibxsmm.." << std::endl;
-  // mini_dnn::backend::MatmulLibxsmm l_matmul_libxsmm;
+  /*
+   * MatmulLibxsmm
+   */
+  MINI_DNN_LOG_INFO << "benchmarking MatmulLibxsmm.." << std::endl;
+  mini_dnn::backend::MatmulLibxsmm l_matmul_libxsmm;
 
-  // std::tie(l_n_repetitions,
-  //          l_time,
-  //          l_gflops) = benchMatmul(l_input_col_major,
-  //                                  l_weight_col_major,
-  //                                  l_matmul_libxsmm);
+  std::tie(l_n_repetitions,
+           l_time,
+           l_gflops) = benchMatmul(l_input_blocked,
+                                   l_weight_blocked,
+                                   l_matmul_libxsmm);
 
-  // MINI_DNN_LOG_INFO << "  repetitions:         " << l_n_repetitions << std::endl;
-  // MINI_DNN_LOG_INFO << "  duration in seconds: " << l_time << std::endl;
-  // MINI_DNN_LOG_INFO << "  FP32 GFLOPS:         " << l_gflops << std::endl;
+  MINI_DNN_LOG_INFO << "  repetitions:         " << l_n_repetitions << std::endl;
+  MINI_DNN_LOG_INFO << "  duration in seconds: " << l_time << std::endl;
+  MINI_DNN_LOG_INFO << "  FP32 GFLOPS:         " << l_gflops << std::endl;
 }
