@@ -1,0 +1,6 @@
+export PATH=~/opt/iree/tools:$PATH
+
+iree-compile —iree-hal-target-backends=llvm-cpu —iree-llvmcpu-target-cpu-features=host —iree-llvmcpu-target-triple=aarch64 add_tosa.mlir -o add_tosa.vmfb
+iree-run-module --module=add_tosa_vmfb --input=3x2xf32="[{0,1},{2,3},{4,5}]" --input=1x1xf32="[{10}]"
+
+https://iree.dev/
