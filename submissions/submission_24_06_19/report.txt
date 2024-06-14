@@ -1,0 +1,18 @@
+INTRO
+========================================================================================================
+Ich habe mich dazu entschieden, die Aufgaben bei mir lokal (MacOS) zu bearbeiten, 
+einfach um zu schauen wie einfach/schwer das geht.
+
+Zur Installation von IREE habe ich folgende Anleitung befolgt:
+https://iree.dev/building-from-source/getting-started/
+
+In diesem Verzeichnis befinden sich lokal die Ordner "iree" (Git-Repository)
+und "iree-build" welcher durch das Kompilieren erstellt wurde.
+Beide Ordner sind nicht in meiner Abgabe enthalten, da
+1. das iree-repository sowieso nicht von mir verändert wurde
+2. der iree-build Ordner viel zu groß wäre um ihn auf Github zu pushen
+   und die executables wahrscheinlich sowieso nur auf Apple Silicon ausführbar wären.
+
+Um die shell-Dateien mit den Commands auszuführen müsste man also nur den Pfad
+ändern, daher in etwa "../iree-build/tools/" entfernen und das global installierte
+IREE an den PATH anhängen, auf sysgen zum Beispiel mit "export PATH=~/opt/iree/tools:$PATH"

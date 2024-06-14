@@ -1,4 +1,4 @@
-iree-build/tools/iree-compile \
+../iree-build/tools/iree-compile \
     --iree-hal-target-backends=llvm-cpu \
     --iree-llvmcpu-target-cpu-features=host \
     --iree-llvmcpu-target-triple=aarch64 \
