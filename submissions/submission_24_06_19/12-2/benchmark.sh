@@ -5,7 +5,8 @@ iree-benchmark-module -- \
     --function=matmul \
     --input="1x8192x8192xf32" \
     --input="1x8192x8192xf32" \
-    > out/benchmark-tosa-matmul.out 2>&1
+    --task_topology_max_group_count=72 \
+    > out/benchmark-tosa-matmul-72.out 2>&1
 
 # GENERIC MATMUL
 iree-benchmark-module -- \
@@ -15,7 +16,8 @@ iree-benchmark-module -- \
     --input="8192x8192xf32" \
     --input="8192x8192xf32" \
     --input="8192x8192xf32" \
-    > out/benchmark-generic-matmul.out 2>&1
+    --task_topology_max_group_count=72 \
+    > out/benchmark-generic-matmul-72.out 2>&1
 
 # LINALG MATMUL
 iree-benchmark-module -- \
@@ -25,4 +27,5 @@ iree-benchmark-module -- \
     --input="8192x8192xf32" \
     --input="8192x8192xf32" \
     --input="8192x8192xf32" \
-    > out/benchmark-linalg-matmul.out 2>&1
+    --task_topology_max_group_count=72 \
+    > out/benchmark-linalg-matmul-72.out 2>&1
