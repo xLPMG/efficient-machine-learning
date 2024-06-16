@@ -1,0 +1,13 @@
+2024-06-16T14:57:22+02:00
+Running iree-benchmark-module
+Run on (144 X 3447 MHz CPU s)
+CPU Caches:
+  L1 Data 64 KiB (x144)
+  L1 Instruction 64 KiB (x144)
+  L2 Unified 1024 KiB (x144)
+  L3 Unified 116736 KiB (x2)
+Load Average: 0.20, 0.96, 1.03
+-------------------------------------------------------------------------------------------
+Benchmark                                 Time             CPU   Iterations UserCounters...
+-------------------------------------------------------------------------------------------
+BM_matmul/process_time/real_time        681 ms        40654 ms            1 items_per_second=1.46823/s
