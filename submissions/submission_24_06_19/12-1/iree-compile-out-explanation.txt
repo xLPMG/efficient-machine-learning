@@ -1,0 +1,4 @@
+Zu sehen ist die IR des Codes nach den jeweiligen Passes.
+Dabei wird vorallem "lowering" betrieben, dh high-level Funktionen
+werden (optimiert) auf low(er)-level Funktionen runtergebrochen.
+Dadurch ist der letzte IR dump zum Beispiel viel länger als der Ausgangscode. 
