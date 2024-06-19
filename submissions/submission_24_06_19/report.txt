@@ -16,3 +16,4 @@ Beide Ordner sind nicht in meiner Abgabe enthalten, da
 Um die shell-Dateien mit den Commands auszuführen müsste man also nur den Pfad
 ändern, daher in etwa "../iree-build/tools/" entfernen und das global installierte
 IREE an den PATH anhängen, auf sysgen zum Beispiel mit "export PATH=~/opt/iree/tools:$PATH"
+Für 12-2 habe ich das schon gemacht, um die benchmarks auf Grace laufen zu lassen.
