@@ -1,0 +1,5 @@
+- Device: Draco
+- Pytorch: /work/EML
+- Modules: module load
+    - anaconda3
+    - mpi/openmpi
