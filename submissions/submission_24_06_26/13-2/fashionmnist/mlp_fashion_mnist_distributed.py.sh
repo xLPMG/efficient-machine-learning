@@ -18,6 +18,8 @@ echo $SLURM_SUBMIT_DIR
 echo "nodelist:"
 echo $SLURM_JOB_NODELIST
 
-source /home/li83keq/venv_pytorch/bin/activate
+module load anaconda3/2024.02-1
+module load mpi/openmpi/4.1.1
 
+conda activate /work/EML/pytorch_env
 python task-4.py

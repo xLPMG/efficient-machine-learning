@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
+from torch.utils.data.distributed import DistributedSampler
 from torchvision import datasets
 from torchvision.transforms import ToTensor
 
@@ -31,8 +32,13 @@ test_data = datasets.FashionMNIST(
     
 # Create data loaders
 batch_size = 64
-train_dataloader = DataLoader(training_data, batch_size=batch_size)
-test_dataloader = DataLoader(test_data, batch_size=batch_size)
+seed = 123456789
+
+dist_train_sampler = DistributedSampler(training_data, num_replicas=size, rank=rank, shuffle=True, drop_last=False, seed=seed)
+dist_test_sampler = DistributedSampler(test_data, num_replicas=size, rank=rank, shuffle=True, drop_last=False, seed=seed)
+
+train_dataloader = DataLoader(training_data, batch_size=batch_size, sampler=dist_train_sampler)
+test_dataloader = DataLoader(test_data, batch_size=batch_size, sampler=dist_test_sampler)
 
 import eml.mlp.trainer as trainer
 import eml.mlp.tester as tester
