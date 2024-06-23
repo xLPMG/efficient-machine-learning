@@ -1,4 +1,4 @@
-- Device: Draco
+- Device: Draco: login1.draco.uni-jena.de
 - Pytorch: /work/EML
 - Modules: module load
     - anaconda3

@@ -7,6 +7,7 @@ dist.init_process_group(backend='mpi')
 # Print the rank and size on every process
 rank = dist.get_rank()
 size = dist.get_world_size()
+print(f"Rank: {rank}, Size: {size}")
 
 ###############
 # BLOCKING

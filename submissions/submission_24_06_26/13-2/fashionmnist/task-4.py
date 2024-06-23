@@ -1,0 +1,67 @@
+import torch
+from torch import nn
+from torch.utils.data import DataLoader
+from torchvision import datasets
+from torchvision.transforms import ToTensor
+
+import torch.distributed as dist
+
+dist.init_process_group(backend='mpi')
+rank = dist.get_rank()
+size = dist.get_world_size()
+
+from pathlib import Path
+Path("out").mkdir(exist_ok=True)
+
+# Download training data from open datasets.
+training_data = datasets.FashionMNIST(
+    root="data",
+    train=True,
+    download=True,
+    transform=ToTensor(),
+)
+
+# Download test data from open datasets.
+test_data = datasets.FashionMNIST(
+    root="data",
+    train=False,
+    download=True,
+    transform=ToTensor(),
+)
+    
+# Create data loaders
+batch_size = 64
+train_dataloader = DataLoader(training_data, batch_size=batch_size)
+test_dataloader = DataLoader(test_data, batch_size=batch_size)
+
+import eml.mlp.trainer as trainer
+import eml.mlp.tester as tester
+import eml.mlp.model as model
+import eml.vis.fashion_mnist as visMNIST
+
+# set seed for reproducibility
+torch.manual_seed(123456789)
+    
+my_eml_model = model.Model()
+loss_func = torch.nn.CrossEntropyLoss()
+l_optimizer = torch.optim.SGD(my_eml_model.parameters(), lr=0.05)
+
+epochs = 26
+visualize = False
+
+for epoch in range(epochs):
+    total_loss = trainer.train(loss_func, train_dataloader, my_eml_model, l_optimizer, size)
+    test_loss, num_correct = tester.test(loss_func, test_dataloader, my_eml_model)
+    
+    torch.distributed.all_reduce( total_loss, op = torch.distributed.ReduceOp.SUM )
+    total_loss = total_loss / float(size)
+    
+    torch.distributed.all_reduce( test_loss, op = torch.distributed.ReduceOp.SUM )
+    test_loss = test_loss / float(size)
+    
+    torch.distributed.all_reduce( num_correct, op = torch.distributed.ReduceOp.SUM )
+    
+    if rank == 0:
+        print(f"Epoch {epoch}/{epochs-1}, Total Loss: {total_loss}, Test loss: {test_loss}, Correct samples: {num_correct}")
+        if epoch % 5 == 0 and visualize == True:
+            visMNIST.plot(0, 1000, test_dataloader, my_eml_model, f"out/vis_{epoch}.pdf")
