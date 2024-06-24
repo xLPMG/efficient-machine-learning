@@ -3,8 +3,13 @@ from torch.utils.data import DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from torch.utils.data.sampler import BatchSampler
 from SimpleDataSet import SimpleDataSet
+import torch.distributed as dist
 
-dataset = SimpleDataSet()
+dist.init_process_group(backend='mpi')
+rank = dist.get_rank()
+size = dist.get_world_size()
+
+dataset = SimpleDataSet( 16 )
 
 # DistributedSampler
 # 
@@ -17,7 +22,8 @@ dataset = SimpleDataSet()
 #                                   If False, the sampler will add extra indices to make the data evenly divisible across the replicas.
 dist_sampler = DistributedSampler(dataset, num_replicas=4, rank=2, shuffle=True, drop_last=False)
 dataloader = DataLoader(dataset, sampler=dist_sampler)
-print(list(dataloader))
 
 # Wrap into BatchSampler
-print(list(BatchSampler(dist_sampler, batch_size=3, drop_last=False)))
+print(rank+"/"+size-1+": "+ list(BatchSampler(dist_sampler, batch_size=3, drop_last=False)))
+
+dist.destroy_process_group()

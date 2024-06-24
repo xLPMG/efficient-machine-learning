@@ -71,3 +71,5 @@ for epoch in range(epochs):
         print(f"Epoch {epoch}/{epochs-1}, Total Loss: {total_loss}, Test loss: {test_loss}, Correct samples: {num_correct}")
         if epoch % 5 == 0 and visualize == True:
             visMNIST.plot(0, 1000, test_dataloader, my_eml_model, f"out/vis_{epoch}.pdf")
+            
+dist.destroy_process_group()
