@@ -1,0 +1,15 @@
+(/work/EML/pytorch_env_new) [li83keq@login1 13-1]$ mpiexec -n 2 python 13-1.py 
+Rank: 1, Size: 2
+Rank: 0, Size: 2
+Tensor1 on rank 1 after receiving: tensor([[1., 1., 1., 1.],
+        [1., 1., 1., 1.],
+        [1., 1., 1., 1.]])
+Tensor2 on rank 1 after i-receiving: tensor([[1., 1., 1., 1.],
+        [1., 1., 1., 1.],
+        [1., 1., 1., 1.]])
+Allreduce result on rank 1: tensor([[ 2,  4,  6,  8],
+        [10, 12, 14, 16],
+        [18, 20, 22, 24]])
+Allreduce result on rank 0: tensor([[ 2,  4,  6,  8],
+        [10, 12, 14, 16],
+        [18, 20, 22, 24]])

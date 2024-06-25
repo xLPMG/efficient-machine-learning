@@ -1,4 +1,3 @@
-import torch
 from torch.utils.data import DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from torch.utils.data.sampler import BatchSampler
@@ -10,6 +9,8 @@ rank = dist.get_rank()
 size = dist.get_world_size()
 
 dataset = SimpleDataSet( 16 )
+batch_size = 3
+drop_last = False
 
 # DistributedSampler
 # 
@@ -20,10 +21,9 @@ dataset = SimpleDataSet( 16 )
 # seed          (int, optional)     random seed used to shuffle the sampler if shuffle=True. (identical across processes)
 # drop_last     (bool, optional)    If True, then the sampler will drop the tail of the data to make it evenly divisible across the number of replicas. 
 #                                   If False, the sampler will add extra indices to make the data evenly divisible across the replicas.
-dist_sampler = DistributedSampler(dataset, num_replicas=4, rank=2, shuffle=True, drop_last=False)
-dataloader = DataLoader(dataset, sampler=dist_sampler)
+dist_sampler = DistributedSampler(dataset, num_replicas=size, rank=rank, shuffle=True, drop_last=drop_last)
 
-# Wrap into BatchSampler
-print(rank+"/"+size-1+": "+ list(BatchSampler(dist_sampler, batch_size=3, drop_last=False)))
+print(rank,"/",size-1,": DataLoader", list(DataLoader(dataset, sampler=dist_sampler, batch_size=batch_size, drop_last=drop_last)))
+print(rank,"/",size-1,": BatchSampler", list(BatchSampler(dist_sampler, batch_size=batch_size, drop_last=drop_last)))
 
 dist.destroy_process_group()
