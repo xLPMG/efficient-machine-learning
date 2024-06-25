@@ -34,8 +34,8 @@ test_data = datasets.FashionMNIST(
 batch_size = 64
 seed = 123456789
 
-dist_train_sampler = DistributedSampler(training_data, num_replicas=size, rank=rank, shuffle=True, drop_last=False, seed=seed)
-dist_test_sampler = DistributedSampler(test_data, num_replicas=size, rank=rank, shuffle=True, drop_last=False, seed=seed)
+dist_train_sampler = DistributedSampler(training_data, num_replicas=size, rank=rank, shuffle=True, drop_last=True, seed=seed)
+dist_test_sampler = DistributedSampler(test_data, num_replicas=size, rank=rank, shuffle=True, drop_last=True, seed=seed)
 
 train_dataloader = DataLoader(training_data, batch_size=batch_size, sampler=dist_train_sampler)
 test_dataloader = DataLoader(test_data, batch_size=batch_size, sampler=dist_test_sampler)
@@ -57,7 +57,9 @@ visualize = False
 
 for epoch in range(epochs):
     total_loss = trainer.train(loss_func, train_dataloader, my_eml_model, l_optimizer, size)
+    total_loss = torch.as_tensor(total_loss)
     test_loss, num_correct = tester.test(loss_func, test_dataloader, my_eml_model)
+    test_loss = torch.as_tensor(test_loss)
     
     torch.distributed.all_reduce( total_loss, op = torch.distributed.ReduceOp.SUM )
     total_loss = total_loss / float(size)
