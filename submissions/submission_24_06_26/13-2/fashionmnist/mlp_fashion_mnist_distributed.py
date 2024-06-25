@@ -60,6 +60,7 @@ for epoch in range(epochs):
     total_loss = torch.as_tensor(total_loss)
     test_loss, num_correct = tester.test(loss_func, test_dataloader, my_eml_model)
     test_loss = torch.as_tensor(test_loss)
+    num_correct = torch.as_tensor(num_correct)
     
     torch.distributed.all_reduce( total_loss, op = torch.distributed.ReduceOp.SUM )
     total_loss = total_loss / float(size)
