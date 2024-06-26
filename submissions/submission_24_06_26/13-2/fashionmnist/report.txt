@@ -1,0 +1,5 @@
+Ich habe Aufgaben 1 bis 2 erledigt und das Pythonprogramm getestet. 
+
+Ich hatte aber keine Zeit mehr verschiedene Konfigurationen 
+an Nodes/Cores/Threads rauszusuchen und den Code zu benchmarken.
+(Daher Aufgabe 13.2.3 bewusst ausgelassen)

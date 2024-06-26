@@ -33,7 +33,7 @@ test_data = datasets.FashionMNIST(
 if rank == 0:
     start = time.time()
     print("Started timer")
-    print("Training on ", size, " processes")
+    print("Training on", size, "processes")
     
 # Create data loaders
 batch_size = 64
@@ -60,9 +60,14 @@ l_optimizer = torch.optim.SGD(my_eml_model.parameters(), lr=0.05)
 epochs = 26
 visualize = False
 
+dist.barrier()
+if rank == 0:
+    print("Starting training")
+    
 for epoch in range(epochs):
     total_loss = trainer.train(loss_func, train_dataloader, my_eml_model, l_optimizer, size)
     total_loss = torch.as_tensor(total_loss)
+    
     test_loss, num_correct = tester.test(loss_func, test_dataloader, my_eml_model)
     test_loss = torch.as_tensor(test_loss)
     num_correct = torch.as_tensor(num_correct)
@@ -83,6 +88,6 @@ for epoch in range(epochs):
 if rank == 0:   
     end = time.time()
     duration = end - start
-    print("Finished training for ", epochs, " epochs. Duration: ", duration, " seconds.")
+    print("Finished training for", epochs, "epochs. Duration:", duration, "seconds.")
  
 dist.destroy_process_group()

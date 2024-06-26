@@ -1,3 +1,7 @@
+####################################################################################################
+# main.py output
+####################################################################################################
+
 # drop_last=False, batch_size = 3
 
 (/work/EML/pytorch_env_new) [li83keq@login1 sampling]$ mpiexec -n 2 python main.py 
@@ -33,3 +37,16 @@
 0 / 3 : BatchSampler [[12, 11, 2]]
 2 / 3 : DataLoader [tensor([ 90, 130, 150])]
 2 / 3 : BatchSampler [[9, 13, 15]]
+
+####################################################################################################
+Explanation
+####################################################################################################
+
+batch_size determines how many samples will be in one batch. If the total amount of samples is not
+divisible by the batch size, we can see the effects of drop_last:
+    - when set to False, the last batch will contain 1 to batch_size-1 samples
+    - when set to True, the last batch will contain batch_size samples, because all remaining
+    samples which are not enough to form another batch are simply dropped, e.g not used/included.
+
+If the total amount of samples can be divided by the batch size, we can distribute the samples evenly 
+among all batches and there is nothing to drop, thus the drop_last parameter won't change anything.
