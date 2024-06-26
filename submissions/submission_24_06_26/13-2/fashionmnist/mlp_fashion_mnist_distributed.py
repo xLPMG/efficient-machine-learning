@@ -30,8 +30,10 @@ test_data = datasets.FashionMNIST(
 )
 
 # start timer
-start = time.time()
-print("Started timer")
+if rank == 0:
+    start = time.time()
+    print("Started timer")
+    print("Training on ", size, " processes")
     
 # Create data loaders
 batch_size = 64
@@ -77,9 +79,10 @@ for epoch in range(epochs):
         print(f"Epoch {epoch}/{epochs-1}, Total Loss: {total_loss}, Test loss: {test_loss}, Correct samples: {num_correct}")
         if epoch % 5 == 0 and visualize == True:
             visMNIST.plot(0, 1000, test_dataloader, my_eml_model, f"out/vis_{epoch}.pdf")
-           
-end = time.time()
-duration = end - start
-print("Finished training for ", epochs, " epochs. Duration: ", duration, " seconds.")
+
+if rank == 0:   
+    end = time.time()
+    duration = end - start
+    print("Finished training for ", epochs, " epochs. Duration: ", duration, " seconds.")
  
 dist.destroy_process_group()
