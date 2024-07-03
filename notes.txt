@@ -1,0 +1,3 @@
+tar -xvf
+source /mnt/.../venvs/pytorch_cuda/bin/activate
+ln -s /mnt/hd1/data/seismic_data
