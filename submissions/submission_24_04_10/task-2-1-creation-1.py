@@ -9,8 +9,8 @@ tenZ1 = torch.zeros(2, 2)
 print("size: 2 x 2")
 print(tenZ1)
 
-tenZ2 = torch.zeros(2, 4)
-print("size: 2 x 4")
+tenZ2 = torch.zeros(2, 3, 4)
+print("size: 2 x 3 x 4")
 print(tenZ2)
 
 tenZ3 = torch.zeros(4, 2)

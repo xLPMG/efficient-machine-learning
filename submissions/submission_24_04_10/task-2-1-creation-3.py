@@ -7,7 +7,7 @@ yDim = 2
 xDim = 3
 
 tensorList = []
-# since the values are just consecutively increased numbers, 
+# since the values are just consecutively increasing numbers, 
 # we can use a counter variable
 i = 0
 
